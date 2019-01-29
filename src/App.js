@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Route, Link, withRouter} from 'react-router-do
 import Main from './components/Main.js'
 import Login from './components/Login.js'
 import Shop from './components/Shop.js'
-import DataBase from './data/db.js'
+import UserDatabase from './data/UserDatabase.js'
 
-let users = new DataBase('users', 'login', 'money')
+let userDb = new UserDatabase()
 
-users.generateFakeUsers()
+userDb.generateFakeUsers()
 
 class App extends Component {
 
     constructor(props) {
         super(props)
-        this.user = users.getData(sessionStorage['login']) || false
+        this.user = userDb.getCurrentUser()
         this.state = {
             user: this.user
         }
@@ -21,27 +21,16 @@ class App extends Component {
 
     render() {
 
-        const updateUser = (props) => {
-            this.setState({user: users.getData(sessionStorage['login']) || false})
-        }
-
-        const login = (props) => {
-            return (
-                <Login dataOfUsers = {users} user = {this.state.user} updateUser = {updateUser} />
-            )
-        }
-        
-        const shop = (props) => {
-            return (
-                <Shop user = {this.state.user} />
-            )
-        }
+        const updateUser = (props) => this.setState({user: userDb.getCurrentUser()})
+        const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} />        
+        const shop = (props) => <Shop user = {this.state.user} users = {userDb} />
+        const main = (props) => <Main user = {userDb} />
 
         return (
             <Router>
                <div>
                     <div id = 'shadow'></div>
-                    <Route exact path = '/' component = {Main} />
+                    <Route exact path = '/' render = {main} />
                     <Route path = '/shop' render = {shop} />
                     <Route path = '/login' render = {login} />
                 </div>

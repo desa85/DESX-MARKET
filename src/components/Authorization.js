@@ -9,14 +9,13 @@ class Authorization extends Component {
         super(props)
         this.state = {
             login: '',
-            open: true,
-            errorMessage: false,
+            errorMessage: null,
             isRedirect: false
         }
     }
 
     render() {
-        function validateLogin(login) {
+        const validateLogin = (login) => {
             let reg = /^[A-z0-9_.]+$/g
             let result = login.search(reg)
             return !!~result
@@ -27,15 +26,15 @@ class Authorization extends Component {
             let login = this.state.login
 
             if (!validateLogin(login)) {
-                this.setState({errorMessage: 'Невалидный формат данных'})
+                this.setState({errorMessage: 'Логин содержит запрещенные символы'})
                 return
             } 
             
-            if (!users.search('login', login)) {
-                users.addData(login, 100)
+            if (!users.search(login)) {
+                users.insert(login, 100)
             }
 
-            sessionStorage['login'] = users.search('login', login)
+            users.updateCurrentUser(login) 
             this.setState({isRedirect: true})
         }
 
@@ -49,15 +48,11 @@ class Authorization extends Component {
             
         }
 
-        var nana = () => {
-            this.setState({open: !this.state.open})
-        }
-
         return (
             this.state.isRedirect ? 
             <Redirect to = '/shop' /> :
-            <div id = {this.state.open ? 'login-window' : 'login-window-close'}>
-                <h1 id = 'headline-login'>ваш логин</h1>
+            <div id = 'login-window'>
+                <h1 id = 'headline-login'>Ваш логин</h1>
                 <form id = 'authorization-form'>
                     <div id = 'error-message' class = {this.state.errorMessage ? '' : 'visible'}>{this.state.errorMessage}</div>
                     <input id = 'input-login' placeholder = "login..." value = {this.state.login} onChange = {(e) => {this.setState({login: e.target.value})}} />

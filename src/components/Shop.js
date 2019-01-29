@@ -7,7 +7,7 @@ import Footer from './Footer'
 class Shop extends Component {
     render() {
         return (
-            !sessionStorage['login'] ? 
+            !this.props.users.getCurrentUser() ? 
             <Redirect to="/login" /> :
             <div id = 'wrapper'>
                 <Header user = {this.props.user} />

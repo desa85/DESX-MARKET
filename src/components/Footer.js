@@ -9,7 +9,7 @@ class Footer extends Component {
                 <p>github.com/desa85</p>
                 </div>
                 <div>
-                    <p>все права защищены</p>
+                    <p>Все права защищены</p>
                 </div>
                 <div>
                     <p>DESX.SU 2019</p>
