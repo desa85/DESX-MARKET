@@ -11,32 +11,32 @@ userDb.generateFakeUsers()
 
 class App extends Component {
 
-    constructor(props) {
-        super(props)
-        this.user = userDb.getCurrentUser()
-        this.state = {
-            user: this.user
-        }
+  constructor(props) {
+    super(props)
+    this.user = userDb.getCurrentUser()
+    this.state = {
+      user: this.user
     }
+  }
 
-    render() {
+  render() {
 
-        const updateUser = (props) => this.setState({user: userDb.getCurrentUser()})
-        const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} />        
-        const shop = (props) => <Shop user = {this.state.user} users = {userDb} />
-        const main = (props) => <Main user = {userDb} />
+    const updateUser = (props) => this.setState({user: userDb.getCurrentUser()})
+    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} />        
+    const shop = (props) => <Shop user = {this.state.user} users = {userDb} />
+    const main = (props) => <Main user = {userDb} />
 
-        return (
-            <Router>
-               <div>
-                    <div id = 'shadow'></div>
-                    <Route exact path = '/' render = {main} />
-                    <Route path = '/shop' render = {shop} />
-                    <Route path = '/login' render = {login} />
-                </div>
-            </Router>
-        )
-    }
+    return (
+      <Router>
+        <div>
+          <div id = 'shadow'></div>
+          <Route exact path = '/' render = {main} />
+          <Route path = '/shop' render = {shop} />
+          <Route path = '/login' render = {login} />
+        </div>
+      </Router>
+    )
+  }
 }
 
 export default App
