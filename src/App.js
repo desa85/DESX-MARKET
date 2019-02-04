@@ -4,6 +4,8 @@ import Main from './components/Main.js'
 import Login from './components/Login.js'
 import Shop from './components/Shop.js'
 import UserDatabase from './data/UserDatabase.js'
+import Balance from './components/Balance.js'
+
 
 let userDb = new UserDatabase()
 
@@ -22,9 +24,11 @@ class App extends Component {
   render() {
 
     const updateUser = (props) => this.setState({user: userDb.getCurrentUser()})
-    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} />        
-    const shop = (props) => <Shop user = {this.state.user} users = {userDb} />
+
     const main = (props) => <Main user = {userDb} />
+    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} />        
+    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {updateUser} />
+    const balance = (props) => <Balance user = {this.state.user} cash = {this.state.user.money} users = {userDb} updateUser = {updateUser} />
 
     return (
       <Router>
@@ -32,6 +36,7 @@ class App extends Component {
           <div id = 'shadow'></div>
           <Route exact path = '/' render = {main} />
           <Route path = '/shop' render = {shop} />
+          <Route path = '/balance' render = {balance} />
           <Route path = '/login' render = {login} />
         </div>
       </Router>

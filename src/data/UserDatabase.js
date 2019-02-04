@@ -31,6 +31,13 @@ class UserDatabase extends DataBase {
   updateCurrentUser(login) {
     sessionStorage['login'] = this.search(login)
   }
+
+  addMoney(money) {
+    const id = sessionStorage['login']
+    const moneyInData = +super.find(id)['money']
+    this.changeData(id, 'money', moneyInData + +money)
+    localStorage.setItem('users', JSON.stringify(this.dates))
+  }
 }
 
 export default UserDatabase
