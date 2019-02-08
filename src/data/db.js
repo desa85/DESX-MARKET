@@ -45,6 +45,14 @@ class DataBase {
     })
     return result
   }
+
+  changeData(id, key, value) {
+    this._dates.forEach((data, index) => {
+      if (data.id === id) {
+        this._dates[index][key] = value
+      }
+    })
+  }
 }
 
 export default DataBase
