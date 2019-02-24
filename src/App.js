@@ -21,14 +21,17 @@ class App extends Component {
     }
   }
 
+  updateUser() {
+    this.setState({user: userDb.getCurrentUser()})
+  }
+
+
   render() {
 
-    const updateUser = (props) => this.setState({user: userDb.getCurrentUser()})
-
     const main = (props) => <Main user = {userDb} />
-    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} />        
-    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {updateUser} />
-    const balance = (props) => <Balance user = {this.state.user} cash = {this.state.user.money} users = {userDb} updateUser = {updateUser} />
+    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {() => {this.updateUser()}} />        
+    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {this.updateUser} />
+    const balance = (props) => <Balance user = {this.state.user} cash = {this.state.user.money} users = {userDb} updateUser = {() => {this.updateUser()}} />
 
     return (
       <Router>
