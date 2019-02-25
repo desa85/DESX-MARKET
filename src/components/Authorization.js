@@ -9,7 +9,7 @@ class Authorization extends Component {
       super(props)
       this.state = {
       login: '',
-      errorMessage: null,
+      errorMessage: '',
       isRedirect: false
       }
   }
