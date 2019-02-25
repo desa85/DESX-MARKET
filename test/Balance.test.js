@@ -19,7 +19,7 @@ describe('Тестирование баланса', () => {
     let authorization
     let check
 
-    beforeEach(()=>{
+    beforeEach(() => {
         userDb = new UserDatabase()
         updateUser = () => {
             wrapper.setState({user: userDb.getCurrentUser()})
@@ -30,11 +30,11 @@ describe('Тестирование баланса', () => {
         authorization = shallow(<Authorization user = {userDb.getCurrentUser()} dataOfUsers = {userDb} updateUser = {updateUser} />)
         profile = shallow(<Profile userName = {0} cash = {0} />)
         
-       profileCreate = (userName, cash) => shallow(<Profile userName = {userName} cash = {cash} />)
+        profileCreate = (userName, cash) => shallow(<Profile userName = {userName} cash = {cash} />)
 
-       authorization.find('input').simulate('change', {
-        target: {value: 'Lexa_555'}
-    })
+        authorization.find('input').simulate('change', {
+            target: {value: 'Lexa_555'}
+        })
         authorization.find('#button-login').simulate('click', { preventDefault() {} })
 
         check = (value) => {

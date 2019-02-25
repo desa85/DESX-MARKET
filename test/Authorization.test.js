@@ -28,7 +28,7 @@ describe('Тестирование авторизации', () => {
         return result
        }
 
-    beforeEach(()=>{
+    beforeEach(() => {
         userDb = new UserDatabase()
         updateUser = () => {
             wrapper.setState({user: userDb.getCurrentUser()})
