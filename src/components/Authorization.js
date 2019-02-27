@@ -31,7 +31,8 @@ class Authorization extends Component {
     } 
     
     if (!users.search(login)) {
-        users.insert(login, 100)
+      const userId = users.insert(login, 100).id
+      this.props.userItemDb.present(userId)
     }
 
     users.updateCurrentUser(login) 
