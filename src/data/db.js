@@ -14,9 +14,18 @@ class DataBase {
     return this._dates.find((data) => data.id === id)
   }
 
-    commitСhanges() {
+  commitСhanges() {
     localStorage.setItem(this.dataName, JSON.stringify(this.dates))
   }
+
+  isEmpty(){
+    return !localStorage.getItem(this.dataName)
+  }
+
+  sessionUserId(){
+    return sessionStorage['sessionUserId']
+  }
+
 
   insert() {
     let arg = Object.values(arguments)
@@ -40,15 +49,7 @@ class DataBase {
   }
 
   search(key, value) {
-    let result = false
-
-    this._dates.forEach((data) => {
-      if (data[key] === value) {
-        result = data['id']
-        return
-      }
-    })
-    return result
+    return this._dates.find(data => data[key] === value).id
   }
 
   searchAll(key, value) {

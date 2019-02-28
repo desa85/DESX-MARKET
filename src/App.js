@@ -10,15 +10,14 @@ import Balance from './components/Balance.js'
 import Inventory from './components/Inventory.js'
 
 
-let userDb = new UserDatabase()
-let itemDb = new ItemDatabase()
+const userDb = new UserDatabase()
+const itemDb = new ItemDatabase()
 
-let FakeUsersId = userDb.generateFakeUsers()
-itemDb.generateitems()
+let FakeUserIds = userDb.generateFakeUsers()
+itemDb.generateItems()
 
 let userItemDb = new UserItemDatabase(userDb, itemDb)
-export { userItemDb }
-userItemDb.presentAllUsers(FakeUsersId)
+userItemDb.presentAllUsers(FakeUserIds)
 
 class App extends Component {
 
@@ -31,17 +30,17 @@ class App extends Component {
   }
 
   updateUser() {
-    this.setState({user: userDb.getCurrentUser()})
+      this.setState({user: userDb.getCurrentUser()})
   }
 
 
   render() {
 
     const main = (props) => <Main user = {userDb} />
-    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {updateUser} userItemDb = {userItemDb} />        
-    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {updateUser} />
-    const balance = (props) => <Balance user = {this.state.user} users = {userDb} updateUser = {updateUser} />
-    const inventory = (props) => <Inventory user = {this.state.user} users = {userDb} updateUser = {updateUser} userItemDb = {userItemDb} />
+    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {() => this.updateUser()} userItemDb = {userItemDb} />        
+    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} />
+    const balance = (props) => <Balance user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} />
+    const inventory = (props) => <Inventory user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} userItemDb = {userItemDb} />
 
     return (
       <Router>

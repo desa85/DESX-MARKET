@@ -8,30 +8,29 @@ class UserDatabase extends DataBase {
   }
 
   search(login) {
-    return super.search('login', login)
+    return this.dates.find(user => user.login === login)
   }
 
   generateFakeUsers() {
-    if (!localStorage.getItem('users')) {
-      let usersId = []
-      usersId.push(this.insert('Lexa', 7800)['id'])
-      usersId.push(this.insert('Oleg', 3)['id'])
-      usersId.push(this.insert('Macho', 8000)['id'])
-      localStorage.setItem('users', JSON.stringify(this.dates))
-      return usersId
-    }
+    if (this.isEmpty()) {
+      return [
+        this.insert('Lexa', 7800).id,
+        this.insert('Oleg', 3).id,
+        this.insert('Macho', 8000).id
+      ]
+    } else return []
   }
 
   getCurrentUser() {
-    return this.find(sessionStorage['login']) || null
+    return this.find(this.sessionUserId()) || null
   }
 
   updateCurrentUser(login) {
-    sessionStorage['login'] = this.search(login)
+    sessionStorage['sessionUserId'] = this.search(login).id
   }
 
   addMoney(money) {
-    const id = sessionStorage['login']
+    const id = this.sessionUserId()
     const moneyInData = +super.find(id)['money']
     this.changeData(id, 'money', moneyInData + +money)
   }
