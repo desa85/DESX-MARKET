@@ -53,12 +53,9 @@ class DataBase {
   }
 
   searchAll(key, value) {
-    let result = []
-
-    this._dates.forEach((data) => {
-      if (data[key] === value) result.push(data['id'])
-    })
-    return result
+    return this._dates
+      .filter(data => data[key] === value)
+      .map(data => data.id)
   }
 
   changeData(id, key, value) {
