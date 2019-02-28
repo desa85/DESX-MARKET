@@ -37,7 +37,6 @@ class DataBase {
     })
     values['id'] = uuid()
     this._dates.push(values)
-    localStorage.setItem(this.dataName, JSON.stringify(this._dates))
     this.commitСhanges()
 
     return values
@@ -48,11 +47,11 @@ class DataBase {
     this.commitСhanges()
   }
 
-  search(key, value) {
+  getId(key, value) {
     return this._dates.find(data => data[key] === value).id
   }
 
-  searchAll(key, value) {
+  getIds(key, value) {
     return this._dates
       .filter(data => data[key] === value)
       .map(data => data.id)

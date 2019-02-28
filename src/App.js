@@ -13,10 +13,10 @@ import Inventory from './components/Inventory.js'
 const userDb = new UserDatabase()
 const itemDb = new ItemDatabase()
 
-let FakeUserIds = userDb.generateFakeUsers()
+const FakeUserIds = userDb.generateFakeUsers()
 itemDb.generateItems()
 
-let userItemDb = new UserItemDatabase(userDb, itemDb)
+const userItemDb = new UserItemDatabase(userDb, itemDb)
 userItemDb.presentAllUsers(FakeUserIds)
 
 class App extends Component {

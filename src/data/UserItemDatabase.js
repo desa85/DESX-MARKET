@@ -8,16 +8,16 @@ class UserItemDatabase extends DataBase {
         this.arguments = ['userId', 'itemId']
       }
 
-      addItem(user, item) {
-        if(!this.userDb.find(user) && !this.itemDb.find(item)) return null
-        this.insert(user, item)
+      addItem(userId, itemId) {
+        if(!this.userDb.find(userId) && !this.itemDb.find(itemId)) return null
+        this.insert(userId, itemId)
       }
 
       present(user) {
-        const presents = []
-
-        presents.push(this.itemDb.search('name', 'Меч короля'))
-        presents.push(this.itemDb.search('name', 'Шпора Матан'))
+        const presents = [
+        this.itemDb.getId('name', 'Меч короля'),
+        this.itemDb.getId('name', 'Шпора Матан')
+        ]
 
         const presentsAdd = [...this.pushSameValue(presents[0], this.random(4)), ...this.pushSameValue(presents[1], this.random(2))]
           .sort((a, b) => Math.random() -0.5)

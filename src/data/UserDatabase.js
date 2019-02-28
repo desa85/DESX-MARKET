@@ -7,7 +7,7 @@ class UserDatabase extends DataBase {
     this.arguments = ['login', 'money']
   }
 
-  search(login) {
+  getId(login) {
     return this.dates.find(user => user.login === login)
   }
 
@@ -26,13 +26,13 @@ class UserDatabase extends DataBase {
   }
 
   updateCurrentUser(login) {
-    sessionStorage['sessionUserId'] = this.search(login).id
+    sessionStorage['sessionUserId'] = this.getId(login).id
   }
 
   addMoney(money) {
     const id = this.sessionUserId()
-    const moneyInData = +super.find(id)['money']
-    this.changeData(id, 'money', moneyInData + +money)
+    const userMoney = +super.find(id).money
+    this.changeData(id, 'money', userMoney + +money)
   }
 }
 
