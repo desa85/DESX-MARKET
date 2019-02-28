@@ -4,12 +4,20 @@ import Main from './components/Main.js'
 import Login from './components/Login.js'
 import Shop from './components/Shop.js'
 import UserDatabase from './data/UserDatabase.js'
+import ItemDatabase from './data/ItemDatabase.js'
+import UserItemDatabase from './data/UserItemDatabase.js'
 import Balance from './components/Balance.js'
+import Inventory from './components/Inventory.js'
 
 
-let userDb = new UserDatabase()
+const userDb = new UserDatabase()
+const itemDb = new ItemDatabase()
 
-userDb.generateFakeUsers()
+const FakeUserIds = userDb.generateFakeUsers()
+itemDb.generateItems()
+
+const userItemDb = new UserItemDatabase(userDb, itemDb)
+userItemDb.presentAllUsers(FakeUserIds)
 
 class App extends Component {
 
@@ -22,16 +30,17 @@ class App extends Component {
   }
 
   updateUser() {
-    this.setState({user: userDb.getCurrentUser()})
+      this.setState({user: userDb.getCurrentUser()})
   }
 
 
   render() {
 
     const main = (props) => <Main user = {userDb} />
-    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {() => {this.updateUser()}} />        
-    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {this.updateUser} />
-    const balance = (props) => <Balance user = {this.state.user} cash = {this.state.user.money} users = {userDb} updateUser = {() => {this.updateUser()}} />
+    const login = (props) => <Login dataOfUsers = {userDb} user = {this.state.user} updateUser = {() => this.updateUser()} userItemDb = {userItemDb} />        
+    const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} />
+    const balance = (props) => <Balance user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} />
+    const inventory = (props) => <Inventory user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} userItemDb = {userItemDb} />
 
     return (
       <Router>
@@ -39,6 +48,7 @@ class App extends Component {
           <div id = 'shadow'></div>
           <Route exact path = '/' render = {main} />
           <Route path = '/shop' render = {shop} />
+          <Route path = '/inventory' render = {inventory} />
           <Route path = '/balance' render = {balance} />
           <Route path = '/login' render = {login} />
         </div>

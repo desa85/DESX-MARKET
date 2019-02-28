@@ -2,10 +2,11 @@ import Balance from '../src/components/Balance'
 import Authorization from '../src/components/Authorization.js'
 import Profile from '../src/components/Profile.js'
 import UserDatabase from '../src/data/UserDatabase.js'
+import ItemDatabase from '../src/data/ItemDatabase.js'
+import UserItemDatabase from '../src/data/UserItemDatabase.js'
 import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-
 
 configure({ adapter: new Adapter() });
 
@@ -21,21 +22,28 @@ describe('Тестирование баланса', () => {
 
     beforeEach(() => {
         userDb = new UserDatabase()
+        const itemDb = new ItemDatabase()
+
+        let FakeUserIds = userDb.generateFakeUsers()
+        itemDb.generateItems()
+
+        let userItemDb = new UserItemDatabase(userDb, itemDb)
+        userItemDb.presentAllUsers(FakeUserIds)
+        
         updateUser = () => {
             wrapper.setState({user: userDb.getCurrentUser()})
         }
 
         userDb.generateFakeUsers()
         wrapper = shallow(<Balance user = {userDb.getCurrentUser()} users = {userDb} updateUser = {updateUser} />)
-        authorization = shallow(<Authorization user = {userDb.getCurrentUser()} dataOfUsers = {userDb} updateUser = {updateUser} />)
+        authorization = shallow(<Authorization user = {userDb.getCurrentUser()} dataOfUsers = {userDb} userItemDb = {userItemDb} updateUser = {updateUser} />)
         profile = shallow(<Profile userName = {0} cash = {0} />)
         
         profileCreate = (userName, cash) => shallow(<Profile userName = {userName} cash = {cash} />)
 
-        authorization.find('input').simulate('change', {
-            target: {value: 'Lexa_555'}
-        })
+        authorization.find('input').simulate('change', { target: {value: 'Lexa_555'} })
         authorization.find('#button-login').simulate('click', { preventDefault() {} })
+        wrapper = shallow(<Balance user = {userDb.getCurrentUser()} users = {userDb} updateUser = {updateUser} />)
 
         check = (value) => {
             wrapper.find('input').simulate('change', {
@@ -50,9 +58,6 @@ describe('Тестирование баланса', () => {
         }
         
     })
-
-    
-
 
     it('Ввод невалидных данных', () => {
         let err
@@ -107,7 +112,6 @@ describe('Тестирование баланса', () => {
 
         const user = userDb.getCurrentUser()
         const profile = profileCreate(user.login, user.money) 
-
         const cash = '' + profile.find('#top-cash').props().children[0]
         
         expect(cash).toEqual('1312.32')

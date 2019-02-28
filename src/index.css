@@ -291,3 +291,52 @@ h2 {
   font-size: 20px;
   color: #606060;
 }
+
+#items {
+  display: table;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.item {
+  width: 300px;
+  height: 248px;
+  background-color: #00000066;
+  border: 1px solid #ffffff66;
+  float: left;
+  margin-bottom: 30px;
+  margin-left:  10px;
+  margin-right: 10px;
+  margin-top: 0px;
+
+}
+
+.item:nth-child(4n) {
+  clear: left;
+}
+
+.item * {
+  text-align: center;
+}
+
+.item-name {
+  height: 20%;
+  font-size: 28px;
+  border-bottom: 2px solid #ffffff88;
+}
+
+.item-img {
+  height: 55%;
+}
+
+.item-img * {
+  height: 100%;
+}
+
+.item-sell {
+  height: 25%;
+  font-size: 28px;
+  border-top: 2px solid #ffffff88;
+}

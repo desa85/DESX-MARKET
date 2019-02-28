@@ -3,40 +3,36 @@ import DataBase from './db.js'
 class UserDatabase extends DataBase {
 
   constructor() {
-    super()
-    this._dates = []
+    super('users')
     this.arguments = ['login', 'money']
-    this.dataName = 'users'
   }
 
-  search(login) {
-    return super.search('login', login)
+  getId(login) {
+    return this.dates.find(user => user.login === login)
   }
 
   generateFakeUsers() {
-    if (localStorage.getItem('users')) {
-      JSON.parse(localStorage.getItem('users')).forEach((iteam) => this.pushData(iteam))
-    } else {
-      this.insert('Lexa', 7800)
-      this.insert('Oleg', 3)
-      this.insert('Macho', 8000)
-      localStorage.setItem('users', JSON.stringify(this.dates))
-    }
+    if (this.isEmpty()) {
+      return [
+        this.insert('Lexa', 7800).id,
+        this.insert('Oleg', 3).id,
+        this.insert('Macho', 8000).id
+      ]
+    } else return []
   }
 
   getCurrentUser() {
-    return this.find(sessionStorage['login']) || null
+    return this.find(this.sessionUserId()) || null
   }
 
   updateCurrentUser(login) {
-    sessionStorage['login'] = this.search(login)
+    sessionStorage['sessionUserId'] = this.getId(login).id
   }
 
   addMoney(money) {
-    const id = sessionStorage['login']
-    const moneyInData = +super.find(id)['money']
-    this.changeData(id, 'money', moneyInData + +money)
-    localStorage.setItem('users', JSON.stringify(this.dates))
+    const id = this.sessionUserId()
+    const userMoney = +super.find(id).money
+    this.changeData(id, 'money', userMoney + +money)
   }
 }
 

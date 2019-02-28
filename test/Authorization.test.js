@@ -1,6 +1,8 @@
 import Authorization from '../src/components/Authorization.js'
 import Profile from '../src/components/Profile.js'
 import UserDatabase from '../src/data/UserDatabase.js'
+import ItemDatabase from '../src/data/ItemDatabase.js'
+import UserItemDatabase from '../src/data/UserItemDatabase.js'
 import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -30,12 +32,20 @@ describe('Тестирование авторизации', () => {
 
     beforeEach(() => {
         userDb = new UserDatabase()
+        const itemDb = new ItemDatabase()
+
+        let FakeUserIds = userDb.generateFakeUsers()
+        itemDb.generateItems()
+
+        let userItemDb = new UserItemDatabase(userDb, itemDb)
+        userItemDb.presentAllUsers(FakeUserIds)
+        
         updateUser = () => {
             wrapper.setState({user: userDb.getCurrentUser()})
         }
 
         userDb.generateFakeUsers()
-        wrapper = shallow(<Authorization user = {userDb.getCurrentUser()} dataOfUsers = {userDb} updateUser = {updateUser} />)
+        wrapper = shallow(<Authorization user = {userDb.getCurrentUser()} dataOfUsers = {userDb} userItemDb = {userItemDb} updateUser = {updateUser} />)
         
        profileCreate = (userName, cash) => shallow(<Profile userName = {userName} cash = {cash} />)
 
