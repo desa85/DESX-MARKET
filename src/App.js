@@ -8,6 +8,7 @@ import ItemDatabase from './data/ItemDatabase.js'
 import UserItemDatabase from './data/UserItemDatabase.js'
 import Balance from './components/Balance.js'
 import Inventory from './components/Inventory.js'
+import Users from './components/Users.js'
 
 
 const userDb = new UserDatabase()
@@ -41,6 +42,7 @@ class App extends Component {
     const shop = (props) => <Shop user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} />
     const balance = (props) => <Balance user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} />
     const inventory = (props) => <Inventory user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} userItemDb = {userItemDb} />
+    const users = (props) => <Users user = {this.state.user} users = {userDb} updateUser = {() => this.updateUser()} userItemDb = {userItemDb} />
 
     return (
       <Router>
@@ -51,6 +53,7 @@ class App extends Component {
           <Route path = '/inventory' render = {inventory} />
           <Route path = '/balance' render = {balance} />
           <Route path = '/login' render = {login} />
+          <Route path = '/users' render = {users} />
         </div>
       </Router>
     )

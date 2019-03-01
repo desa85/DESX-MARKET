@@ -6,7 +6,7 @@ class Menu extends Component {
     return (
       <ul id = 'menu'>
         <li><Link to = "/shop">Магазин</Link></li>
-        <li>Пользователи</li>
+        <li><Link to = "/users">Пользователи</Link></li>
         <li><Link to = "/inventory">Инвентарь</Link></li>
       </ul>
     )
