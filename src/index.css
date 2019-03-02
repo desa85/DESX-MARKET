@@ -340,3 +340,158 @@ h2 {
   font-size: 28px;
   border-top: 2px solid #ffffff88;
 }
+
+#contents {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 900px;
+  margin: auto;
+}
+
+#search {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px solid #ffffff55;
+  padding-top: 14px;
+  padding-bottom: 10px;
+}
+
+#search div * {
+  margin-right: 16px; 
+}
+
+.input-form-search {
+  width: 100px;
+  height: 28px;
+  box-shadow: 0px 0px 10px 0px #00000022;
+  border-radius: 2px;
+  border: 1px solid #cacaca88;
+  background-color: #ffffffcc;
+}
+
+.input-form-search:first-child {
+  width: 200px;
+}
+
+#filter {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px solid #ffffff55;
+  padding-top: 28px;
+  padding-bottom: 10px;
+}
+
+#filter input {
+  display: none;
+}
+
+.filter-button {
+  height: 30px;
+  width: inherit;
+  background-color: #ffffff55;
+  margin-right: 12px;
+  padding: 4px;
+}
+
+.filter-button:hover {
+  background-color: #ffffff77;
+}
+
+.filter-radio:checked + .filter-button {
+  background-color: #ffffffaa;
+}
+
+#users {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: safe;
+  border-bottom: 2px solid #ffffff33;
+  padding-top: 28px;
+  padding-bottom: 10px;
+}
+
+.user-block {
+  display: flex;
+  background-color: #ffffff33;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  margin-bottom: 30px;
+  margin-right: 60px;
+}
+
+.user-block:hover {
+  background-color: #ffffff55;
+}
+
+.user-block:nth-child(3n) {
+  margin-right: 0px;
+}
+
+.userImg-block {
+  display: flex;
+  width: 260px;
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+}
+
+.userImg-block img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+  background-color: #cacaca;
+  margin: auto;
+}
+
+.userImg-block img:before {  
+  content: none;
+}
+
+.userName-block{
+  width: 260px;
+  height: 30px;
+  font-size: 22px;
+  border-bottom: 1px solid #ffffff55;
+  text-align: center;
+}
+
+.cash-block{
+  width: 260px;
+  font-size: 22px;
+  border-bottom: 1px solid #ffffff55;
+  padding: .5em 0;
+  text-align: center;
+}
+
+.inventory-button-block{
+  width: 260px;
+  height: 50px;
+  font-size: 22px;
+  text-align: center;
+  border: none;
+  background-color: #00000000;
+}
+
+#pages {
+  padding-top: 18px;
+}
+
+#pages * {
+  display: inline-flex;
+  flex-direction: row;
+  width: 38px;
+  height: 38px;
+  background-color: #ffffff55;
+  text-align: center;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#pages *:hover {
+  background-color: #ffffff77;
+}
