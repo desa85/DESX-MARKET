@@ -43,7 +43,7 @@ class Inventory extends Component {
   }
 
   clickModal() {
-    this.toggleModal(this.props.name, this.props.img)
+    this.toggleModal()
     this.props.db.order.addOrder(this.state.modalUserItemId, +this.state.modalInput)
   }
   

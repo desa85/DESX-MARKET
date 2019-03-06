@@ -9,14 +9,13 @@ class Shop extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modal: false,
+      isModal: false,
       modalValue: {}
     }
   }
 
   items() {
-    
-    return this.props.db.order.getAllItems(this.props.db.user.sessionUserId())
+    return this.props.db.order.getItemsInventory(this.props.db.user.sessionUserId())
       .map(item => {
         return {name: item.name, iconPath: item.iconPath, price: item.price, orderId: item.orderId}
       })
@@ -24,7 +23,7 @@ class Shop extends Component {
 
   toggleModal(values) {
       this.setState({
-        modal: !!values,
+        isModal: !!values,
         modalValue: values || {}
       })
   }
@@ -35,10 +34,12 @@ class Shop extends Component {
         <div className = 'modal-inventory'>
           <div className = 'modal-inventory-err'>
               <p>Недостаточно средств</p>
-              <p>Ваш Баланс: <span>{this.state.modalValue.userBalance}</span></p>
-              <p>Стоимость предмета: <span>{this.state.modalValue.price}</span></p>
-              <p>вам не хватает: <span>{this.state.modalValue.lacks}</span></p>
-            <button className = 'input-form modal-inventory-button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
+              <div>
+                <p>Ваш Баланс: <span>{this.state.modalValue.userBalance}</span></p>
+                <p>Стоимость предмета: <span>{this.state.modalValue.price}</span></p>
+              </div>
+              <p>Вам не хватает: <span>{this.state.modalValue.lacks}</span></p>
+              <button className = 'input-form modal-inventory-button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
           </div>
         </div>
       </div>
@@ -47,46 +48,46 @@ class Shop extends Component {
       !this.props.db.user.getCurrentUser() ?
       <Redirect to="/login" /> :
       <div id = 'wrapper'>
-      {this.state.modal && modal}
+      {this.state.isModal && modal}
         <div>
-            <Header user = {this.props.user} />
-            <div id = 'contents'>
-                <div id = 'search'>
-                    <div>
-                        <input placeholder = 'Ник' className = 'input-form-search' />
-                    </div>
-                    <div>
-                        <span>Цена от</span>
-                        <input placeholder = '0' className = 'input-form-search' />
-                    </div>
-                    <div>
-                        <span>до</span>
-                        <input placeholder = '999' className = 'input-form-search' />
-                    </div>
-                    
+          <Header user = {this.props.user} />
+          <div id = 'contents'>
+              <div id = 'search'>
+                <div>
+                  <input placeholder = 'Ник' className = 'input-form-search' />
                 </div>
-                <div id = 'filter'>
-                    <input type = 'radio' name = 'filter' id = 'radio-po-date'  className = 'filter-radio' />
-                    <label for = 'radio-po-date' className = 'filter-button'>ПО ДАТЕ</label>
-                    <input type = 'radio' name = 'filter' id = 'radio-po-niku' className = 'filter-radio' />
-                    <label for = 'radio-po-niku' className = 'filter-button'>ПО НИКУ</label>
-                    <input type = 'radio' name = 'filter' id = 'radio-po-balansu' className = 'filter-radio' />
-                    <label for = 'radio-po-balansu' className = 'filter-button'>ПО БАЛАНСУ</label>
+                <div>
+                  <span>Цена от</span>
+                  <input placeholder = '0' className = 'input-form-search' />
                 </div>
-                <div id = 'items'>
-                  {this.items().map(item => <Order 
-                    db = {this.props.db} 
-                    userItemId = {item.userItemId} 
-                    name = {item.name} 
-                    img = {item.iconPath} 
-                    price = {item.price} 
-                    orderId = {item.orderId}
-                    toggleModal = {this.toggleModal.bind(this, )}
-                  />)}
+                <div>
+                  <span>до</span>
+                  <input placeholder = '999' className = 'input-form-search' />
                 </div>
-                <Pages count = {5} />
-            </div>
-            <Footer />
+                  
+              </div>
+              <div id = 'filter'>
+                <input type = 'radio' name = 'filter' id = 'radio-po-date'  className = 'filter-radio' />
+                <label for = 'radio-po-date' className = 'filter-button'>ПО ДАТЕ</label>
+                <input type = 'radio' name = 'filter' id = 'radio-po-niku' className = 'filter-radio' />
+                <label for = 'radio-po-niku' className = 'filter-button'>ПО НИКУ</label>
+                <input type = 'radio' name = 'filter' id = 'radio-po-balansu' className = 'filter-radio' />
+                <label for = 'radio-po-balansu' className = 'filter-button'>ПО БАЛАНСУ</label>
+              </div>
+              <div id = 'items'>
+                {this.items().map(item => <Order 
+                  db = {this.props.db} 
+                  userItemId = {item.userItemId} 
+                  name = {item.name} 
+                  img = {item.iconPath} 
+                  price = {item.price} 
+                  orderId = {item.orderId}
+                  toggleModal = {this.toggleModal.bind(this)}
+                />)}
+              </div>
+              <Pages count = {5} />
+          </div>
+          <Footer />
         </div>
       </div>
   )
