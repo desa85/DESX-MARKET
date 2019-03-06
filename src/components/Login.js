@@ -6,7 +6,7 @@ class Login extends Component {
     return (
       <div>
         <h1 id = 'hello-message'>Добро пожаловать</h1>
-        <Authorization dataOfUsers = {this.props.dataOfUsers} user = {this.props.user} updateUser = {this.props.updateUser} userItemDb = {this.props.userItemDb}/>
+        <Authorization db = {this.props.db} />
       </div>
     )
   }

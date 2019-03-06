@@ -36,9 +36,9 @@
     "jest": "23.6.0",
     "jest-localstorage-mock": "^2.4.0"
   },
-
   "jest": {
-      "setupFile": ["jest-localstorage-mock"]
+    "setupFile": [
+      "jest-localstorage-mock"
+    ]
   }
-
 }

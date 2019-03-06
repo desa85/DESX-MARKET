@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import Header from './Header'
 import Footer from './Footer'
 import User from './User.js'
@@ -11,6 +12,8 @@ class Users extends Component {
 
     render() {
         return (
+            !this.props.db.user.getCurrentUser() ?
+            <Redirect to="/login" /> :
             <div>
                 <Header user = {this.props.user} />
                 <div id = 'contents'>
@@ -37,7 +40,7 @@ class Users extends Component {
                         <label for = 'radio-po-balansu' className = 'filter-button'>ПО БАЛАНСУ</label>
                     </div>
                     <div id = 'users'>
-                        {this.props.users.dates.map(user => <User userImgPath = {5} userName = {user.login} cash = {user.money} />)}
+                        {this.props.db.user.dates.map(user => <User userImgPath = {5} userName = {user.login} cash = {user.money} />)}
                     </div>
                     <Pages count = {5} />
                 </div>

@@ -31,7 +31,7 @@ class UserItemDatabase extends DataBase {
       getItems(userId) {
         return this.dates
           .filter(userItem => userItem.userId === userId)
-          .map(userItem => this.itemDb.find(userItem.itemId))
+          .map(userItem => {return {item: this.itemDb.find(userItem.itemId), userItemId: userItem.id}})
       }
 }
 
