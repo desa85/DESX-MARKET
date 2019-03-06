@@ -48,7 +48,7 @@ class DataBase {
   }
 
   getId(key, value) {
-    return this._dates.find(data => data[key] === value).id
+    return (this._dates.find(data => data[key] === value) || {id: null}).id
   }
 
   getIds(key, value) {

@@ -36,7 +36,7 @@ body {
   text-align: center;
 }
 
-#shadow {
+.shadow {
   background: #00000080;
   position: fixed;
   top: 0;
@@ -98,7 +98,7 @@ h2 {
   height: 70px;
   background: black;
   border-top: solid 1px #ffffff66;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   display: flex;
@@ -293,7 +293,11 @@ h2 {
 }
 
 #items {
-  display: table;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: safe;
+  width: 900px;
   margin: auto;
   text-align: center;
   padding-top: 50px;
@@ -301,7 +305,7 @@ h2 {
 }
 
 .item {
-  width: 300px;
+  width: 278px;
   height: 248px;
   background-color: #00000066;
   border: 1px solid #ffffff66;
@@ -311,10 +315,6 @@ h2 {
   margin-right: 10px;
   margin-top: 0px;
 
-}
-
-.item:nth-child(4n) {
-  clear: left;
 }
 
 .item * {
@@ -338,7 +338,45 @@ h2 {
 .item-sell {
   height: 25%;
   font-size: 28px;
+  width: 100%;
+  border: none;
   border-top: 2px solid #ffffff88;
+  background-color: #00000000;
+}
+
+.item-buy {
+  display: flex;
+  justify-content: space-between;
+  height: 58px;
+  font-size: 28px;
+  width: 100%;
+  border: none;
+  border-top: 2px solid #ffffff88;
+  background-color: #00000000;
+}
+
+.item-buy * {
+  padding: 0px 12px 0px 12px
+}
+
+.item-buy-button {
+  background-color: #00000000;
+  border: none;
+}
+
+.item-buy-button:hover {
+  background-color: #ffffff33;
+}
+
+
+.item-sell * {
+  font-size: 18px;
+  color: #ff9922;
+  line-height: 20px;
+}
+
+.item-sell:hover {
+  background-color: #ffffff10;
 }
 
 #contents {
@@ -494,4 +532,64 @@ h2 {
 
 #pages *:hover {
   background-color: #ffffff77;
+}
+
+.foreground {
+  z-index: 1;
+}
+
+.modal-inventory {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  position: absolute;
+  top: 0; left: 0; bottom: 220px; right: 0;
+  margin: auto;
+  background-color: black;
+  border: solid 2px #888
+}
+
+.modal-inventory * {
+  margin: auto;
+}
+
+.modal-inventory-name {
+  height: 50px;
+  font-size: 32px;
+}
+
+.modal-inventory-img, .modal-inventory-img img {
+  height: 200px;
+}
+
+.modal-inventory-form input {
+  height: 40px;
+  width: 100px;
+  margin-right: 8px;
+  border-radius: 5px;
+  border: none;
+  color: #555555;
+  font-size: 12px;
+}
+
+.modal-inventory-form span {
+  font-size: 22px;
+}
+
+.modal-inventory-button {
+  height: 50px;
+  width: 310px;
+  margin-bottom: 10px; 
+  border-radius: 6px;
+  border: none;
+  box-shadow: inset -2px -20px 18px 0px #afafaf69;
+  font-size: 18px;
+  color: #333;
+}
+
+.modal-inventory-err {
+  font-size: 28px;
 }

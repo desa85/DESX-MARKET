@@ -15,6 +15,7 @@ class Authorization extends Component {
   }
 
   render() {
+    const db = this.props.db
     const validateLogin = (login) => {
       let reg = /^[A-z0-9_.]+$/g
       let result = login.search(reg)
@@ -22,7 +23,7 @@ class Authorization extends Component {
   }
 
   const checkValidateLogin = () =>  {
-    let users = this.props.dataOfUsers
+    let users = db.user
     let login = this.state.login
 
     if (!validateLogin(login)) {
@@ -32,7 +33,7 @@ class Authorization extends Component {
     
     if (!users.getId(login)) {
       const userId = users.insert(login, 100).id
-      this.props.userItemDb.present(userId)
+      db.userItem.present(userId)
     }
 
     users.updateCurrentUser(login) 
@@ -40,12 +41,12 @@ class Authorization extends Component {
     }
 
     const clickButton = (e) => {
-      let users = this.props.dataOfUsers
+      let users = db.user
       let login = this.state.login
 
       e.preventDefault() 
       checkValidateLogin() 
-      this.props.updateUser()
+      db.updateUser()
         
     }
 

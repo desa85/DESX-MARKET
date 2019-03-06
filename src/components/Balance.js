@@ -32,9 +32,9 @@ class Balance extends Component {
     let cash = this.getCash(this.state.input)
     if (cash) {
       if(this.cashValidate(cash)) {
-        this.props.users.addMoney(cash)
+        this.props.db.user.addMoney(cash)
         this.setState({action: SUCCESS})
-        this.props.updateUser()
+        this.props.db.updateUser()
       } else {
         this.setState({action: ERROR, err: 'Нельзя пополнять больше 1000', input: ''})
       }
