@@ -12,7 +12,7 @@ class Inventory extends Component {
       modalItemIconPath: '',
       modalInput: '0',
       modalUserItemId: '',
-      modal: false,
+      isModal: false,
       items: this.items()
     }
   }
@@ -34,7 +34,7 @@ class Inventory extends Component {
   
   toggleModal(itemName, itemIconPath, userItemId) {
       this.setState({
-        modal: !this.state.modal,
+        isModal: !this.state.isModal,
         modalItemName: itemName,
         modalItemIconPath: itemIconPath,
         modalUserItemId: userItemId,
@@ -75,7 +75,7 @@ class Inventory extends Component {
       !this.props.db.user.getCurrentUser() ? 
       <Redirect to="/login" /> :
       <div>
-        {this.state.modal && modal}
+        {this.state.isModal && modal}
         <Header user = {this.props.user} />
         <div id = 'items'>
           {this.state.items}

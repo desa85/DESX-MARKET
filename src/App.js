@@ -58,7 +58,6 @@ class App extends Component {
       <Router>
         <div>
           <div className = 'shadow'></div>
-          <button onClick = {() => sessionStorage.clear()}>выход</button>
           <Route exact path = '/' render = {main} />
           <Route path = '/shop' render = {shop} />
           <Route path = '/inventory' render = {inventory} />

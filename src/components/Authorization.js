@@ -23,26 +23,26 @@ class Authorization extends Component {
   }
 
   const checkValidateLogin = () =>  {
-    let users = db.user
-    let login = this.state.login
+    const userDb = db.user
+    const login = this.state.login
 
     if (!validateLogin(login)) {
       this.setState({errorMessage: 'Логин содержит запрещенные символы'})
       return
     } 
     
-    if (!users.getId(login)) {
-      const userId = users.insert(login, 100).id
+    if (!userDb.getId(login)) {
+      const userId = userDb.insert(login, 100).id
       db.userItem.present(userId)
     }
 
-    users.updateCurrentUser(login) 
+    userDb.updateCurrentUser(login) 
     this.setState({isRedirect: true})
-    }
+  }
 
     const clickButton = (e) => {
-      let users = db.user
-      let login = this.state.login
+      const userDb = db.user
+      const login = this.state.login
 
       e.preventDefault() 
       checkValidateLogin() 
