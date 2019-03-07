@@ -15,7 +15,7 @@ class Users extends Component {
             !this.props.db.user.getCurrentUser() ?
             <Redirect to="/login" /> :
             <div>
-                <Header user = {this.props.user} />
+                <Header user = {this.props.user} path = {Users.path} />
                 <div id = 'contents'>
                     <div id = 'search'>
                         <div>
@@ -49,5 +49,7 @@ class Users extends Component {
         )
     }
 }
+
+Users.path = '/users'
 
 export default Users

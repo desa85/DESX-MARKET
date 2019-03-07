@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <div id = "header">
         <div id = "logo">DESX</div>
-        <Menu />
+        <Menu path = {this.props.path}/>
         <Profile userName = {this.props.user.login} cash = {this.props.user.money}/>
       </div>
     )

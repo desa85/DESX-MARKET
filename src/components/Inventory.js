@@ -76,7 +76,7 @@ class Inventory extends Component {
       <Redirect to="/login" /> :
       <div>
         {this.state.isModal && modal}
-        <Header user = {this.props.user} />
+        <Header user = {this.props.user} path = {Inventory.path} />
         <div id = 'items'>
           {this.state.items}
         </div>
@@ -85,5 +85,7 @@ class Inventory extends Component {
     )
   }
 }
+
+Inventory.path = '/inventory'
 
 export default Inventory

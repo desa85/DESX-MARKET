@@ -50,7 +50,7 @@ class Shop extends Component {
       <div id = 'wrapper'>
       {this.state.isModal && modal}
         <div>
-          <Header user = {this.props.user} />
+          <Header user = {this.props.user} path = {Shop.path} />
           <div id = 'contents'>
               <div id = 'search'>
                 <div>
@@ -93,5 +93,7 @@ class Shop extends Component {
   )
   }
 }
+
+Shop.path = '/shop'
 
 export default Shop
