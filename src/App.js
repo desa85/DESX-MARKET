@@ -59,11 +59,11 @@ class App extends Component {
         <div>
           <div className = 'shadow'></div>
           <Route exact path = '/' render = {main} />
-          <Route path = '/shop' render = {shop} />
-          <Route path = '/inventory' render = {inventory} />
+          <Route path = {Shop.path} render = {shop} />
+          <Route path = {Inventory.path} render = {inventory} />
           <Route path = '/balance' render = {balance} />
           <Route path = '/login' render = {login} />
-          <Route path = '/users' render = {users} />
+          <Route path = {Users.path} render = {users} />
         </div>
       </Router>
     )

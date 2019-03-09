@@ -5,11 +5,16 @@
   margin: 0;
   padding: 0;
   font-family: 'Sarabun', sans-serif;
+  text-decoration: none;
   color: #fff
 }
 
 html, body, #root, #root > div {
   height: 100%;
+}
+
+ul {
+  list-style-type: none;
 }
 
 body {
@@ -121,12 +126,16 @@ h2 {
   font-size: 28px;
 }
 
-#menu li {
-  opacity: 0.5;
+.menu-li{
+  color: #aaa;
 }
 
-#menu li:hover {
-  opacity: 0.9;
+#menu li a:hover {
+  color: #eee;
+}
+
+#profile {
+  position: relative;
 }
 
 #profile * {
@@ -148,12 +157,13 @@ h2 {
 }
 
 #top-avatar {
-  background: gray;
+  background: #eee;
   width: 70px;
   height: 70px;
   border-radius: 100px;
   float: left;
   margin-left: 18px;
+  margin-bottom: 20px;
 }
 
 /*login*/
@@ -604,4 +614,63 @@ h2 {
 
 .modal-inventory-err div {
   margin: 48px 0px 48px 0px;
+}
+
+#touchBar {
+  position: absolute;
+  display: none;
+  width: 200px;
+  height: 180px;
+  background-color: #eee;
+  clear: left;
+  top: 80px;
+  right: 10px;
+  padding: 0px;
+  border-radius: 3px;
+}
+
+#touchBar li {
+  width: 100%;
+  padding: 0px;
+  margin: 20px 0px 20px 0px;
+  text-align: center;
+}
+
+#touchBar a {
+  text-align: center;
+  font-size: 20px;
+  color: #222;
+  margin: 0px;
+}
+
+#touchBar::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 165px;
+  border-bottom: 15px solid #eee;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;  
+}
+
+#touchBar li {
+  color: #222;
+
+}
+
+#touchBar *:hover {
+  color: #fff;
+}
+
+#profile-menu {
+  margin: 0;
+}
+
+#profile-menu:hover > #touchBar {
+  display: block;
+  
+}
+
+.is-active {
+  color: #eee;
 }

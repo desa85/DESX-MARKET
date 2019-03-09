@@ -52,7 +52,7 @@ class Authorization extends Component {
 
     return (
       this.state.isRedirect ? 
-      <Redirect to = '/shop' /> :
+      <Redirect to = {Shop.path} /> :
       <div id = 'login-window'>
         <h1 id = 'headline-login'>Ваш логин</h1>
         <form id = 'authorization-form'>
