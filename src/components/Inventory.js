@@ -78,7 +78,7 @@ class Inventory extends Component {
       <div>
         {this.state.isModal && modal}
         <Header user = {this.props.user} path = {Inventory.path} />
-        <Paginator datas = {this.state.items } page = {this.props.page} path = {Inventory.path} />
+        <Paginator datas = {this.state.items} page = {this.props.page} path = {Inventory.path} />
         <Footer />
       </div>
     )
