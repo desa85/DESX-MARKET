@@ -63,6 +63,7 @@ class Shop extends Component {
       {this.state.isModal && modal}
         <div>
           <Header user = {this.props.user} path = {Shop.path} />
+          {/*TODO refactoring (logic to database)*/}
           <Paginator datas = {orders} page = {this.props.page} path = {Shop.path}>
             <div id = 'contents'>
                 <div id = 'search'>
