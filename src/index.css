@@ -306,12 +306,11 @@ h2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: safe;
+  justify-content: space-between;
   width: 900px;
   margin: auto;
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
 }
 
 .item {
@@ -464,23 +463,18 @@ h2 {
   display: flex;
   background-color: #ffffff33;
   flex-direction: column;
-  width: inherit;
+  width: 260px;
   height: inherit;
   margin-bottom: 30px;
-  margin-right: 60px;
 }
 
 .user-block:hover {
   background-color: #ffffff55;
 }
 
-.user-block:nth-child(3n) {
-  margin-right: 0px;
-}
-
 .userImg-block {
   display: flex;
-  width: 260px;
+  width: 100%;
   height: 120px;
   align-items: center;
   justify-content: center;
@@ -499,7 +493,7 @@ h2 {
 }
 
 .userName-block{
-  width: 260px;
+  width: 100%;
   height: 30px;
   font-size: 22px;
   border-bottom: 1px solid #ffffff55;
@@ -507,7 +501,7 @@ h2 {
 }
 
 .cash-block{
-  width: 260px;
+  width: 100%;
   font-size: 22px;
   border-bottom: 1px solid #ffffff55;
   padding: .5em 0;
@@ -515,7 +509,7 @@ h2 {
 }
 
 .inventory-button-block{
-  width: 260px;
+  width: 100%;
   height: 50px;
   font-size: 22px;
   text-align: center;
@@ -542,6 +536,10 @@ h2 {
 
 #pages *:hover {
   background-color: #ffffff77;
+}
+
+#activePage {
+  background-color: #ffffff88;
 }
 
 .foreground {

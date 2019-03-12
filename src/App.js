@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, withRouter} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch,  Redirect, Link, withRouter} from 'react-router-dom'
 import Main from './components/Main.js'
 import Login from './components/Login.js'
 import Shop from './components/Shop.js'
@@ -20,6 +20,7 @@ itemDb.generateItems()
 
 const userItemDb = new UserItemDatabase(userDb, itemDb)
 userItemDb.presentAllUsers(FakeUserIds)
+userItemDb.presentAllUsers(FakeUserIds[0] ? Array(10).fill(FakeUserIds[0]) : FakeUserIds) //delete
 
 const OrderDb = new Order(userItemDb)
 
@@ -49,22 +50,27 @@ class App extends Component {
 
     const main = (props) => <Main user = {userDb} />
     const login = (props) => <Login db = {this.db} />        
-    const shop = (props) => <Shop user = {this.state.user} db = {this.db} />
+    const shop = ({match}) => <Shop user = {this.state.user} db = {this.db} page = {match.params.page} />
     const balance = (props) => <Balance user = {this.state.user} db = {this.db} />
-    const inventory = (props) => <Inventory user = {this.state.user} db = {this.db} />
-    const users = (props) => <Users user = {this.state.user} db = {this.db} />
+    const inventory = ({match}) => <Inventory user = {this.state.user} db = {this.db} page = {match.params.page} />
+    const users = ({match}) => <Users user = {this.state.user} db = {this.db} page = {match.params.page} />
 
     return (
       <Router>
-        <div>
-          <div className = 'shadow'></div>
-          <Route exact path = '/' render = {main} />
-          <Route path = {Shop.path} render = {shop} />
-          <Route path = {Inventory.path} render = {inventory} />
-          <Route path = '/balance' render = {balance} />
-          <Route path = '/login' render = {login} />
-          <Route path = {Users.path} render = {users} />
-        </div>
+        <Switch>
+          <div>
+            <div className = 'shadow'></div>
+            <Route exact path = '/' render = {main} />
+            <Route path = {Shop.path + '/:page'} component = {shop} />
+            <Route exact path = {Shop.path} component = {shop} />
+            <Route path = {Inventory.path + '/:page'} component = {inventory} />
+            <Route exact path = {Inventory.path} component = {inventory} />
+            <Route path = '/balance' render = {balance} />
+            <Route path = '/login' render = {login} />
+            <Route path = {Users.path + '/:page'} component = {users} />
+            <Route exact path = {Users.path} component = {users} />
+          </div>
+        </Switch>
       </Router>
     )
   }
