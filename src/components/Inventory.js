@@ -3,6 +3,7 @@ import { Redirect } from 'react-router'
 import Item from './Item.js'
 import Header from './Header'
 import Footer from './Footer'
+import Paginator from './Paginator.js'
 
 class Inventory extends Component {
   constructor(props) {
@@ -77,9 +78,7 @@ class Inventory extends Component {
       <div>
         {this.state.isModal && modal}
         <Header user = {this.props.user} path = {Inventory.path} />
-        <div id = 'items'>
-          {this.state.items}
-        </div>
+        <Paginator datas = {this.state.items} page = {this.props.page} path = {Inventory.path} />
         <Footer />
       </div>
     )

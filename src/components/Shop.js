@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import { Redirect } from 'react-router'
+import { Redirect, Router, Route } from 'react-router'
 import Header from './Header'
 import Footer from './Footer'
 import Pages from './Pages'
 import Order from './Order'
+import Paginator from './Paginator'
 
 class Shop extends Component {
   constructor(props) {
@@ -44,6 +45,17 @@ class Shop extends Component {
         </div>
       </div>
     )
+
+    const orders = this.items().map(item => <Order 
+      db = {this.props.db} 
+      userItemId = {item.userItemId} 
+      name = {item.name} 
+      img = {item.iconPath} 
+      price = {item.price} 
+      orderId = {item.orderId}
+      toggleModal = {this.toggleModal.bind(this)}
+    />)
+
     return (
       !this.props.db.user.getCurrentUser() ?
       <Redirect to="/login" /> :
@@ -51,42 +63,35 @@ class Shop extends Component {
       {this.state.isModal && modal}
         <div>
           <Header user = {this.props.user} path = {Shop.path} />
-          <div id = 'contents'>
-              <div id = 'search'>
-                <div>
-                  <input placeholder = 'Ник' className = 'input-form-search' />
+          {/*TODO refactoring (logic to database)*/}
+          <Paginator datas = {orders} page = {this.props.page} path = {Shop.path}>
+            <div id = 'contents'>
+                <div id = 'search'>
+                  <div>
+                    <input placeholder = 'Ник' className = 'input-form-search' />
+                  </div>
+                  <div>
+                    <span>Цена от</span>
+                    <input placeholder = '0' className = 'input-form-search' />
+                  </div>
+                  <div>
+                    <span>до</span>
+                    <input placeholder = '999' className = 'input-form-search' />
+                  </div>
+                    
                 </div>
-                <div>
-                  <span>Цена от</span>
-                  <input placeholder = '0' className = 'input-form-search' />
+                <div id = 'filter'>
+                  <input type = 'radio' name = 'filter' id = 'radio-po-date'  className = 'filter-radio' />
+                  <label for = 'radio-po-date' className = 'filter-button'>ПО ДАТЕ</label>
+                  <input type = 'radio' name = 'filter' id = 'radio-po-niku' className = 'filter-radio' />
+                  <label for = 'radio-po-niku' className = 'filter-button'>ПО НИКУ</label>
+                  <input type = 'radio' name = 'filter' id = 'radio-po-balansu' className = 'filter-radio' />
+                  <label for = 'radio-po-balansu' className = 'filter-button'>ПО БАЛАНСУ</label>
                 </div>
-                <div>
-                  <span>до</span>
-                  <input placeholder = '999' className = 'input-form-search' />
+                <div id = 'items'>
                 </div>
-                  
-              </div>
-              <div id = 'filter'>
-                <input type = 'radio' name = 'filter' id = 'radio-po-date'  className = 'filter-radio' />
-                <label for = 'radio-po-date' className = 'filter-button'>ПО ДАТЕ</label>
-                <input type = 'radio' name = 'filter' id = 'radio-po-niku' className = 'filter-radio' />
-                <label for = 'radio-po-niku' className = 'filter-button'>ПО НИКУ</label>
-                <input type = 'radio' name = 'filter' id = 'radio-po-balansu' className = 'filter-radio' />
-                <label for = 'radio-po-balansu' className = 'filter-button'>ПО БАЛАНСУ</label>
-              </div>
-              <div id = 'items'>
-                {this.items().map(item => <Order 
-                  db = {this.props.db} 
-                  userItemId = {item.userItemId} 
-                  name = {item.name} 
-                  img = {item.iconPath} 
-                  price = {item.price} 
-                  orderId = {item.orderId}
-                  toggleModal = {this.toggleModal.bind(this)}
-                />)}
-              </div>
-              <Pages count = {5} />
-          </div>
+            </div>
+          </Paginator>
           <Footer />
         </div>
       </div>

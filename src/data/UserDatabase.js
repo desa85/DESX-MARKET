@@ -16,7 +16,8 @@ class UserDatabase extends DataBase {
       return [
         this.insert('Lexa', 7800).id,
         this.insert('Oleg', 3).id,
-        this.insert('Macho', 8000).id
+        this.insert('Macho', 8000).id,
+        ...Array(42).fill(0).map((bot, index) => this.insert('bot' + index, 8000).id)
       ]
     } else return []
   }
