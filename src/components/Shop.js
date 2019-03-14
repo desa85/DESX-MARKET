@@ -11,12 +11,15 @@ class Shop extends Component {
     super(props)
     this.state = {
       isModal: false,
-      modalValue: {}
+      modalValue: {},
+      loginFilter: '',
+      moneyFilterFrom: '',
+      moneyFilterTo: ''
     }
   }
 
-  items() {
-    return this.props.db.order.getItemsInventory(this.props.db.user.sessionUserId())
+  items(actions) {
+    return this.props.db.order.getItemsInventory(this.props.db.user.sessionUserId(), actions)
       .map(item => {
         return {name: item.name, iconPath: item.iconPath, price: item.price, orderId: item.orderId}
       })
@@ -46,7 +49,19 @@ class Shop extends Component {
       </div>
     )
 
-    const orders = this.items().map(item => <Order 
+    const loginFilter = {
+      type: 'search',
+      value: this.state.loginFilter
+    }
+    const moneyFilter = {
+      type: 'fromTo',
+      from: this.state.moneyFilterFrom,
+      to: this.state.moneyFilterTo
+
+    }
+    const actions = {login: loginFilter, price: moneyFilter} 
+
+    const orders = this.items(actions).map(item => <Order 
       db = {this.props.db} 
       userItemId = {item.userItemId} 
       name = {item.name} 
@@ -68,15 +83,15 @@ class Shop extends Component {
             <div id = 'contents'>
                 <div id = 'search'>
                   <div>
-                    <input placeholder = 'Ник' className = 'input-form-search' />
+                    <input placeholder = 'Предмет' className = 'input-form-search' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
                   </div>
                   <div>
                     <span>Цена от</span>
-                    <input placeholder = '0' className = 'input-form-search' />
+                    <input placeholder = '0' className = 'input-form-search' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
                   </div>
                   <div>
                     <span>до</span>
-                    <input placeholder = '999' className = 'input-form-search' />
+                    <input placeholder = '999' className = 'input-form-search' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
                   </div>
                     
                 </div>
@@ -84,9 +99,9 @@ class Shop extends Component {
                   <input type = 'radio' name = 'filter' id = 'radio-po-date'  className = 'filter-radio' />
                   <label for = 'radio-po-date' className = 'filter-button'>ПО ДАТЕ</label>
                   <input type = 'radio' name = 'filter' id = 'radio-po-niku' className = 'filter-radio' />
-                  <label for = 'radio-po-niku' className = 'filter-button'>ПО НИКУ</label>
+                  <label for = 'radio-po-niku' className = 'filter-button'>ПО НАЗВАНИЮ</label>
                   <input type = 'radio' name = 'filter' id = 'radio-po-balansu' className = 'filter-radio' />
-                  <label for = 'radio-po-balansu' className = 'filter-button'>ПО БАЛАНСУ</label>
+                  <label for = 'radio-po-balansu' className = 'filter-button'>ПО ЦЕНЕ</label>
                 </div>
                 <div id = 'items'>
                 </div>

@@ -18,8 +18,8 @@ class Order extends DataBase {
     this.insert(data.userId, data.itemId, itemUserId, price, NEW , dateNow, dateNow)
   }
 
-  getItemsInventory(userId) {
-    return this._dates
+  getItemsInventory(userId, action) {
+    return this.filterDates(action, this.callBackForInventory.bind(this))
       .filter(order => order.userId !== userId && order.status === NEW)
       .map(order => {
         const itemId = this.userItemDb.find(order.userItemId).itemId
@@ -27,6 +27,11 @@ class Order extends DataBase {
         return {name: item.name, iconPath: item.iconPath, price: order.price, orderId: order.id}
       })
   }
+
+ callBackForInventory(data) {
+  data.login = this.userItemDb.itemDb.find(data.itemId).name
+  return data
+ }
 
   newOrders(userId) {
     return this._dates.filter(order => order.userId === userId && order.status === NEW)

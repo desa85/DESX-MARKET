@@ -10,6 +10,23 @@ class DataBase {
     return this._dates
   }
 
+  filterDates(actions, call) {
+    const filters = []
+    const search = (value, key) => element => !!('' + element[key]).match(RegExp(value, 'i'))
+    const fromTo = (from, to, key) => element => !!((+element[key] >= +from || !from ) && (+element[key] <= +to || !to))
+    const output = (!!call) ? this._dates.map(call) : this._dates
+
+    for (let key in actions) {
+      const action = actions[key]
+      switch(action.type) {
+        case 'search': action.value && filters.push(search(action.value, key))
+        case 'fromTo': filters.push(fromTo(action.from, action.to, key))
+      }
+    }
+
+    return output.filter(element => !filters.find(filter => !filter(element)))
+  }
+
   find(id) {
     return this._dates.find((data) => data.id === id)
   }
