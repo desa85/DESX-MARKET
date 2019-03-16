@@ -19,16 +19,16 @@ class Users extends Component {
   render() {
 
     const loginFilter = {
-      type: 'search',
+      type: this.props.db.user.FILTER_SEARCH,
       value: this.state.loginFilter
     }
     const moneyFilter = {
-      type: 'fromTo',
+      type: this.props.db.user.FILTER_FROM_TO,
       from: this.state.moneyFilterFrom,
       to: this.state.moneyFilterTo
 
     }
-    const users = this.props.db.user.filterDates({login: loginFilter, money: moneyFilter})
+    const users = this.props.db.user.filteredData({login: loginFilter, money: moneyFilter})
       .map(user => <User userImgPath = {5} userName = {user.login} cash = {user.money} />)
 
       return (
