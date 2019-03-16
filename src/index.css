@@ -306,7 +306,7 @@ h2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: safe;
   width: 900px;
   margin: auto;
   text-align: center;
@@ -465,6 +465,8 @@ h2 {
   flex-direction: column;
   width: 260px;
   height: inherit;
+  margin-left: 18px;
+  margin-right: 18px;
   margin-bottom: 30px;
 }
 

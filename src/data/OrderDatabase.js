@@ -18,14 +18,17 @@ class Order extends DataBase {
     this.insert(data.userId, data.itemId, itemUserId, price, NEW , dateNow, dateNow)
   }
 
-  getItemsInventory(userId) {
+  getItemsInventory(userId, action) {
     return this._dates
-      .filter(order => order.userId !== userId && order.status === NEW)
-      .map(order => {
-        const itemId = this.userItemDb.find(order.userItemId).itemId
-        const item = this.userItemDb.itemDb.find(itemId)
-        return {name: item.name, iconPath: item.iconPath, price: order.price, orderId: order.id}
-      })
+      .reduce((accumulator, order) => {
+        order.login = this.userItemDb.itemDb.find(order.itemId).name
+        if (order.userId !== userId && order.status === NEW) {
+          const itemId = this.userItemDb.find(order.userItemId).itemId
+          const item = this.userItemDb.itemDb.find(itemId)
+          const value = {name: item.name, iconPath: item.iconPath, price: order.price, orderId: order.id, login: order.login}
+          return (this.filterDates(value, action)) ? [...accumulator, value] : accumulator
+        } else return accumulator
+      }, [])
   }
 
   newOrders(userId) {

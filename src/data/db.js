@@ -4,11 +4,31 @@ class DataBase {
   constructor(dataName) {
     this.dataName = dataName
     this._dates = JSON.parse(localStorage.getItem(this.dataName)) || []
+    this.FILTER_SEARCH = 'search'
+    this.FILTER_FROM_TO = 'fromTo'
   }
 
   get dates() {
     return this._dates
   }
+  
+  filteredData(action) {
+    return this._dates.filter(data => this.filterDates(data, action))
+  }
+
+  filterDates(value, action) {
+    const search = (value, key) => element => !!('' + element[key]).toUpperCase().includes(value.toUpperCase())
+    const fromTo = (from, to, key) => element => !!((+element[key] >= +from || !from ) && (+element[key] <= +to || !to))
+    const filters = Object.entries(action).reduce((accumulator, [key, filter]) => {
+      switch(filter.type) {
+        case this.FILTER_SEARCH: return [...accumulator, search(filter.value, key)]
+        case this.FILTER_FROM_TO: return [...accumulator, fromTo(filter.from, filter.to, key)]
+      }
+    }, [])
+
+    return !filters.find(filter => !filter(value))
+  }
+
 
   find(id) {
     return this._dates.find((data) => data.id === id)

@@ -9,11 +9,27 @@ import Paginator from './Paginator.js'
 class Users extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      loginFilter: '',
+      moneyFilterFrom: '',
+      moneyFilterTo: ''
+    }
   }
 
   render() {
 
-    const users = this.props.db.user.dates.map(user => <User userImgPath = {5} userName = {user.login} cash = {user.money} />)
+    const loginFilter = {
+      type: this.props.db.user.FILTER_SEARCH,
+      value: this.state.loginFilter
+    }
+    const moneyFilter = {
+      type: this.props.db.user.FILTER_FROM_TO,
+      from: this.state.moneyFilterFrom,
+      to: this.state.moneyFilterTo
+
+    }
+    const users = this.props.db.user.filteredData({login: loginFilter, money: moneyFilter})
+      .map(user => <User userImgPath = {5} userName = {user.login} cash = {user.money} />)
 
       return (
         !this.props.db.user.getCurrentUser() ?
@@ -24,15 +40,15 @@ class Users extends Component {
             <div>
               <div id = 'search'>
                 <div>
-                  <input placeholder = 'Ник' className = 'input-form-search' />
+                  <input placeholder = 'Ник' className = 'input-form-search' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
                 </div>
                 <div>
                   <span>Баланс от</span>
-                  <input placeholder = '0' className = 'input-form-search' />
+                  <input placeholder = '0' className = 'input-form-search' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
                 </div>
                 <div>
                   <span>до</span>
-                  <input placeholder = '999' className = 'input-form-search' />
+                  <input placeholder = '999' className = 'input-form-search' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
                 </div>
                             
               </div>
