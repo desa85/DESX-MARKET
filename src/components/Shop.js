@@ -57,7 +57,6 @@ class Shop extends Component {
       type: this.props.db.user.FILTER_FROM_TO,
       from: this.state.moneyFilterFrom,
       to: this.state.moneyFilterTo
-
     }
     const actions = {login: loginFilter, price: moneyFilter} 
 

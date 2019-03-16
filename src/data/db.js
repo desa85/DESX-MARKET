@@ -12,15 +12,14 @@ class DataBase {
     return this._dates
   }
   
-  filteredData(actions) {
-    return this._dates.filter(data => this.filterDates(data, actions))
+  filteredData(action) {
+    return this._dates.filter(data => this.filterDates(data, action))
   }
 
-  filterDates(value, actions) {
-
+  filterDates(value, action) {
     const search = (value, key) => element => !!('' + element[key]).toUpperCase().includes(value.toUpperCase())
     const fromTo = (from, to, key) => element => !!((+element[key] >= +from || !from ) && (+element[key] <= +to || !to))
-    const filters = Object.entries(actions).reduce((accumulator, [key, filter]) => {
+    const filters = Object.entries(action).reduce((accumulator, [key, filter]) => {
       switch(filter.type) {
         case this.FILTER_SEARCH: return [...accumulator, search(filter.value, key)]
         case this.FILTER_FROM_TO: return [...accumulator, fromTo(filter.from, filter.to, key)]

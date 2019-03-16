@@ -20,12 +20,12 @@ class Order extends DataBase {
 
   getItemsInventory(userId, action) {
     return this._dates
-      .reduce((accumulator, data) => {
-        data.login = this.userItemDb.itemDb.find(data.itemId).name
-        if (data.userId !== userId && data.status === NEW) {
-          const itemId = this.userItemDb.find(data.userItemId).itemId
+      .reduce((accumulator, order) => {
+        order.login = this.userItemDb.itemDb.find(order.itemId).name
+        if (order.userId !== userId && order.status === NEW) {
+          const itemId = this.userItemDb.find(order.userItemId).itemId
           const item = this.userItemDb.itemDb.find(itemId)
-          const value = {name: item.name, iconPath: item.iconPath, price: data.price, orderId: data.id, login: data.login}
+          const value = {name: item.name, iconPath: item.iconPath, price: order.price, orderId: order.id, login: order.login}
           return (this.filterDates(value, action)) ? [...accumulator, value] : accumulator
         } else return accumulator
       }, [])
