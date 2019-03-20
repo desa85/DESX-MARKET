@@ -29,6 +29,7 @@ class Order extends DataBase {
           return (this.filterDates(value, action)) ? [...accumulator, value] : accumulator
         } else return accumulator
       }, [])
+        .sort(this.sortDates(action))
   }
 
   newOrders(userId) {

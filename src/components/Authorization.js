@@ -32,7 +32,7 @@ class Authorization extends Component {
     } 
     
     if (!userDb.getId(login)) {
-      const userId = userDb.insert(login, 100).id
+      const userId = userDb.insert(login, 100, new Date(Date.now())).id 
       db.userItem.present(userId)
     }
 
