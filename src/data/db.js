@@ -16,10 +16,10 @@ class DataBase {
   }
   
   filteredData(action) {
-    return this._datas.filter(data => this.filterDates(data, action)).sort(this.sortDatas(action))
+    return this._datas.filter(data => this.filterDatas(data, action)).sort(this.sortDatas(action))
   }
 
-  filterDates(value, action) {
+  filterDatas(value, action) {
     const search = (value, key) => element => !!('' + element[key]).toUpperCase().includes(value.toUpperCase())
     const fromTo = (from, to, key) => element => !!((+element[key] >= +from || !from ) && (+element[key] <= +to || !to))
     const filters = Object.entries(action.filters).reduce((accumulator, [key, filter]) => {
