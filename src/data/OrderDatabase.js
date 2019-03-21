@@ -9,7 +9,8 @@ class Order extends DataBase {
   constructor(userItemDb) {
     super('order')
     this.userItemDb = userItemDb
-    this.arguments = ['userId', 'itemId', 'userItemId', 'price', 'status', 'created', 'updated']
+    this.PRICE = 'price'
+    this.arguments = ['userId', 'itemId', 'userItemId', this.PRICE, 'status', 'created', 'updated']
   }
 
   addOrder(itemUserId, price) {

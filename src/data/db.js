@@ -40,7 +40,7 @@ class DataBase {
 
       if (a[key] instanceof Date) [firstArg, secondArg] = [Date.parse(a[key]), Date.parse(b[key])]
       if (typeof a[key] === 'string') [firstArg, secondArg] = [a[key].toUpperCase(), b[key].toUpperCase()]
-      if (typeof a[key] === 'number') [firstArg, secondArg] = [a[key], b[key]]
+      if (typeof a[key] === 'number') [firstArg, secondArg] = [+a[key], +b[key]]
 
       if (firstArg === secondArg) {
         return 0

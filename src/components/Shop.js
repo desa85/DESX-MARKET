@@ -57,7 +57,7 @@ class Shop extends Component {
     )
     const typeSort =  {
       byDate: this.props.db.user.CREATED,
-      byNumber: this.props.db.user.MONEY,
+      byNumber: this.props.db.order.PRICE,
       byString: this.props.db.user.LOGIN
     }
     const loginFilter = {
