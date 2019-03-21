@@ -3,7 +3,7 @@ const uuid = require('uuid/v4')
 class DataBase {
   constructor(dataName) {
     this.dataName = dataName
-    this._dates = JSON.parse(localStorage.getItem(this.dataName)) || []
+    this._datas = JSON.parse(localStorage.getItem(this.dataName)) || []
     this.FILTER_SEARCH = 'search'
     this.FILTER_FROM_TO = 'fromTo'
     this.SORT_BY_DATE = 'sortByDate'
@@ -12,11 +12,11 @@ class DataBase {
   }
 
   get dates() {
-    return this._dates
+    return this._datas
   }
   
   filteredData(action) {
-    return this._dates.filter(data => this.filterDates(data, action)).sort(this.sortDates(action))
+    return this._datas.filter(data => this.filterDates(data, action)).sort(this.sortDatas(action))
   }
 
   filterDates(value, action) {
@@ -32,29 +32,26 @@ class DataBase {
     return !filters.find(filter => !filter(value))
   }
 
-  sortDates(action) {
-    const sorts = {
-      sortByDate: (key) => (a, b) => {
-        if (Date.parse(a[key]) === Date.parse(b[key])) {
-          return 0
-        } else return (Date.parse(a[key]) > Date.parse(b[key])) ? -1 : 1
-      },
-      sortByNumber: (key) => (a, b) => (+a[key] > +b[key]) ? 1 : -1 ,
-      sortByString: (key) => (a, b) => {
-        if (a[key].toUpperCase() === b[key].toUpperCase()) {
-          return 0
-        } else return (a[key].toUpperCase() > b[key].toUpperCase()) ? 1 : -1 
-      }
+
+  sortDatas(action) {
+    const sorting = (key) => (a, b) => {
+      let firstArg
+      let secondArg
+
+      if (a[key] instanceof Date) [firstArg, secondArg] = [Date.parse(a[key]), Date.parse(b[key])]
+      if (typeof a[key] === 'string') [firstArg, secondArg] = [a[key].toUpperCase(), b[key].toUpperCase()]
+      if (typeof a[key] === 'number') [firstArg, secondArg] = [a[key], b[key]]
+
+      if (firstArg === secondArg) {
+        return 0
+      } else return (firstArg > secondArg) ? 1 : -1 
     }
-    const sort = Object.entries(action.sorts).find(value => value[1])
-    const key = sort[0]
-    const sortType = sort[1]
-    
-    return sorts[sortType](key)
+
+    return sorting(action.sortBy)
   }
 
   find(id) {
-    return this._dates.find((data) => data.id === id)
+    return this._datas.find((data) => data.id === id)
   }
 
   commitСhanges() {
@@ -79,31 +76,31 @@ class DataBase {
       values[key] = arg[index] !== undefined ? arg[index] : ""
     })
     values['id'] = uuid()
-    this._dates.push(values)
+    this._datas.push(values)
     this.commitСhanges()
 
     return values
   }
 
   pushData(data) {
-    this._dates.push(data)
+    this._datas.push(data)
     this.commitСhanges()
   }
 
   getId(key, value) {
-    return (this._dates.find(data => data[key] === value) || {}).id
+    return (this._datas.find(data => data[key] === value) || {}).id
   }
 
   getIds(key, value) {
-    return this._dates
+    return this._datas
       .filter(data => data[key] === value)
       .map(data => data.id)
   }
 
   changeData(id, key, value) {
-    this._dates.forEach((data, index) => {
+    this._datas.forEach((data, index) => {
       if (data.id === id) {
-        this._dates[index][key] = value
+        this._datas[index][key] = value
       }
     })
     this.commitСhanges()

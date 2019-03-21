@@ -4,7 +4,10 @@ class UserDatabase extends DataBase {
 
   constructor() {
     super('users')
-    this.arguments = ['login', 'money', 'created']
+    this.LOGIN = 'login'
+    this.MONEY = 'money'
+    this.CREATED = 'created'
+    this.arguments = [this.LOGIN, this.MONEY, this.CREATED]
   }
 
   getId(login) {

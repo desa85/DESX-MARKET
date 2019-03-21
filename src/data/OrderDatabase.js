@@ -19,7 +19,7 @@ class Order extends DataBase {
   }
 
   getItemsInventory(userId, action) {
-    return this._dates
+    return this._datas
       .reduce((accumulator, order) => {
         order.login = this.userItemDb.itemDb.find(order.itemId).name
         if (order.userId !== userId && order.status === NEW) {
@@ -29,11 +29,11 @@ class Order extends DataBase {
           return (this.filterDates(value, action)) ? [...accumulator, value] : accumulator
         } else return accumulator
       }, [])
-        .sort(this.sortDates(action))
+        .sort(this.sortDatas(action))
   }
 
   newOrders(userId) {
-    return this._dates.filter(order => order.userId === userId && order.status === NEW)
+    return this._datas.filter(order => order.userId === userId && order.status === NEW)
   }
 
   cancel(orderId) {
