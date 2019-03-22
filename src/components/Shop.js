@@ -14,7 +14,8 @@ class Shop extends Component {
       modalValue: {},
       loginFilter: '',
       moneyFilterFrom: '',
-      moneyFilterTo: ''
+      moneyFilterTo: '',
+      sortBy: this.props.db.user.CREATED
     }
   }
 
@@ -30,6 +31,12 @@ class Shop extends Component {
         isModal: !!values,
         modalValue: values || {}
       })
+  }
+
+  sortOut(sort){
+    this.setState({
+      sortBy: sort
+    })
   }
 
   render() {
@@ -48,7 +55,11 @@ class Shop extends Component {
         </div>
       </div>
     )
-
+    const typeSort =  {
+      byDate: this.props.db.user.CREATED,
+      byNumber: this.props.db.order.PRICE,
+      byString: this.props.db.user.LOGIN
+    }
     const loginFilter = {
       type: this.props.db.user.FILTER_SEARCH,
       value: this.state.loginFilter
@@ -58,7 +69,13 @@ class Shop extends Component {
       from: this.state.moneyFilterFrom,
       to: this.state.moneyFilterTo
     }
-    const actions = {login: loginFilter, price: moneyFilter} 
+    const actions = {
+      filters: {
+        login: loginFilter, 
+        price: moneyFilter
+      },
+      sortBy: this.state.sortBy
+    } 
 
     const orders = this.items(actions).map(item => <Order 
       db = {this.props.db} 
@@ -95,12 +112,12 @@ class Shop extends Component {
                     
                 </div>
                 <div id = 'filter'>
-                  <input type = 'radio' name = 'filter' id = 'radio-po-date'  className = 'filter-radio' />
-                  <label for = 'radio-po-date' className = 'filter-button'>ПО ДАТЕ</label>
-                  <input type = 'radio' name = 'filter' id = 'radio-po-niku' className = 'filter-radio' />
-                  <label for = 'radio-po-niku' className = 'filter-button'>ПО НАЗВАНИЮ</label>
-                  <input type = 'radio' name = 'filter' id = 'radio-po-balansu' className = 'filter-radio' />
-                  <label for = 'radio-po-balansu' className = 'filter-button'>ПО ЦЕНЕ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byDate} className = 'filter-radio' />
+                  <label for = {typeSort.byDate} className = 'filter-button'>ПО ДАТЕ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter-radio' />
+                  <label for = {typeSort.byString} className = 'filter-button'>ПО НАЗВАНИЮ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter-radio' />
+                  <label for = {typeSort.byNumber} className = 'filter-button'>ПО ЦЕНЕ</label>
                 </div>
                 <div id = 'items'>
                 </div>
@@ -110,6 +127,13 @@ class Shop extends Component {
         </div>
       </div>
   )
+  }
+
+  componentDidMount() {
+    const radio = document.getElementsByClassName('filter-radio')
+      for (let i = 0; i <= radio.length -1; i++) {
+        radio[i].addEventListener('change', () => this.setState({sortBy: radio[i].id}))
+      }
   }
 }
 

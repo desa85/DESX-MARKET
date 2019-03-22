@@ -9,7 +9,8 @@ class Order extends DataBase {
   constructor(userItemDb) {
     super('order')
     this.userItemDb = userItemDb
-    this.arguments = ['userId', 'itemId', 'userItemId', 'price', 'status', 'created', 'updated']
+    this.PRICE = 'price'
+    this.arguments = ['userId', 'itemId', 'userItemId', this.PRICE, 'status', 'created', 'updated']
   }
 
   addOrder(itemUserId, price) {
@@ -19,20 +20,21 @@ class Order extends DataBase {
   }
 
   getItemsInventory(userId, action) {
-    return this._dates
+    return this._datas
       .reduce((accumulator, order) => {
         order.login = this.userItemDb.itemDb.find(order.itemId).name
         if (order.userId !== userId && order.status === NEW) {
           const itemId = this.userItemDb.find(order.userItemId).itemId
           const item = this.userItemDb.itemDb.find(itemId)
           const value = {name: item.name, iconPath: item.iconPath, price: order.price, orderId: order.id, login: order.login}
-          return (this.filterDates(value, action)) ? [...accumulator, value] : accumulator
+          return (this.filterDatas(value, action)) ? [...accumulator, value] : accumulator
         } else return accumulator
       }, [])
+        .sort(this.sortDatas(action))
   }
 
   newOrders(userId) {
-    return this._dates.filter(order => order.userId === userId && order.status === NEW)
+    return this._datas.filter(order => order.userId === userId && order.status === NEW)
   }
 
   cancel(orderId) {
