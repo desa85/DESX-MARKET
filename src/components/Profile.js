@@ -8,20 +8,20 @@ constructor(props) {
 
   render() {
     return (
-      <div id = 'profile-menu'>
+      <div>
         <div id = 'profile'>
           <div>
-            <div id = 'top-username'>{this.props.userName}</div>
-            <div id = 'top-cash'>{this.props.cash}<b>$</b></div>
+            <div id = 'profile__username'>{this.props.userName}</div>
+            <div id = 'profile__cash'>{this.props.cash}</div>
           </div>
-          <div id = 'top-avatar'>
+          <div id = 'profile__avatar'>
 
           </div>
         </div>
-        <ul id = 'touchBar'>
-          <li><Link to = '/balance'>ПОПОЛНИТЬ БАЛАНС</Link></li>
-          <li><Link to = ''>НАСТРОЙКИ</Link></li>
-          <li><Link to = '' onClick = {() => sessionStorage.clear()}>ВЫЙТИ</Link></li>
+        <ul className = 'dropDown'>
+          <li><Link to = '/balance' className = 'dropDown__a'>ПОПОЛНИТЬ БАЛАНС</Link></li>
+          <li><Link to = '' className = 'dropDown__a'>НАСТРОЙКИ</Link></li>
+          <li><Link to = '' className = 'dropDown__a' onClick = {() => sessionStorage.clear()}>ВЫЙТИ</Link></li>
         </ul>
       </div>
     )

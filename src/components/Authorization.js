@@ -53,14 +53,12 @@ class Authorization extends Component {
     return (
       this.state.isRedirect ? 
       <Redirect to = {Shop.path} /> :
-      <div id = 'login-window'>
-        <h1 id = 'headline-login'>Ваш логин</h1>
-        <form id = 'authorization-form'>
-          <div id = 'error-message' class = {this.state.errorMessage ? '' : 'visible'}>{this.state.errorMessage}</div>
-          <input id = 'input-login' placeholder = "login..." value = {this.state.login} onChange = {(e) => {this.setState({login: e.target.value})}} />
-          <button id = 'button-login' onClick = {clickButton}>войти</button>
+        <form className = 'login-window'>
+        <h1>Ваш логин</h1>
+          <div className = 'login-window__error-message' class = {this.state.errorMessage ? '' : 'visible'}>{this.state.errorMessage}</div>
+          <input className = 'login-window__input' placeholder = "login..." value = {this.state.login} onChange = {(e) => {this.setState({login: e.target.value})}} />
+          <button className = 'login-window__button' onClick = {clickButton}>войти</button>
         </form>
-      </div>
     )
   }
 }

@@ -47,39 +47,40 @@ class Users extends Component {
         <Redirect to="/login" /> :
         <div>
           <Header user = {this.props.user} path = {Users.path} />
-          <Paginator page = {this.props.page} datas = {users} path = {Users.path}>
-            <div>
-              <div id = 'search'>
-                <div>
-                  <input placeholder = 'Ник' className = 'input-form-search' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
+          <div id = 'content'>
+            <Paginator page = {this.props.page} datas = {users} path = {Users.path}>
+              <div>
+                <div className = 'filter'>
+                  <div>
+                    <input placeholder = 'Ник' className = 'filter__input filter__input_full' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
+                  </div>
+                  <div>
+                    <span>Баланс от</span>
+                    <input placeholder = '0' className = 'filter__input' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
+                  </div>
+                  <div>
+                    <span>до</span>
+                    <input placeholder = '999' className = 'filter__input' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
+                  </div>           
                 </div>
-                <div>
-                  <span>Баланс от</span>
-                  <input placeholder = '0' className = 'input-form-search' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
+                <div className = 'filter'>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byDate}  className = 'filter__radio' />
+                  <label for = {typeSort.byDate} className = 'filter__button'>ПО ДАТЕ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter__radio' />
+                  <label for = {typeSort.byString} className = 'filter__button'>ПО НИКУ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter__radio' />
+                  <label for = {typeSort.byNumber} className = 'filter__button'>ПО БАЛАНСУ</label>
                 </div>
-                <div>
-                  <span>до</span>
-                  <input placeholder = '999' className = 'input-form-search' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
-                </div>
-                            
               </div>
-              <div id = 'filter'>
-                <input type = 'radio' name = 'filter' id = {typeSort.byDate}  className = 'filter-radio' />
-                <label for = {typeSort.byDate} className = 'filter-button'>ПО ДАТЕ</label>
-                <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter-radio' />
-                <label for = {typeSort.byString} className = 'filter-button'>ПО НИКУ</label>
-                <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter-radio' />
-                <label for = {typeSort.byNumber} className = 'filter-button'>ПО БАЛАНСУ</label>
-              </div>
+            </Paginator>
             </div>
-          </Paginator>
           <Footer />
         </div>
     )
   }
 
   componentDidMount() {
-    const radio = document.getElementsByClassName('filter-radio')
+    const radio = document.getElementsByClassName('filter__radio')
       for (let i = 0; i <= radio.length -1; i++) {
         radio[i].addEventListener('change', () => this.setState({sortBy: radio[i].id}))
       }

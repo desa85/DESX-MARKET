@@ -25,8 +25,8 @@ class Pages extends Component {
     const currentPage = (+this.props.currentPage > countPages || +this.props.currentPage < 1) ? 1 : +this.props.currentPage
 
     return ((countPages > 1) &&
-      <div id = 'pages'>
-        {this.viewPages(currentPage, countPages).map(page => <Link to = {`${this.props.path}/${page}`} id = {(page === currentPage) ? 'activePage' : ''}>{page}</Link>)}
+      <div className = 'pages'>
+        {this.viewPages(currentPage, countPages).map(page => <Link to = {`${this.props.path}/${page}`} onClick = {e => (page === '...') && e.preventDefault()} className = {`pages__link ${(page === currentPage) ? 'pages__link_active' : ''}`}>{page}</Link>)}
       </div>
     )
   }
