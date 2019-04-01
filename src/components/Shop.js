@@ -98,27 +98,27 @@ class Shop extends Component {
           <div id = 'content'>
             <Paginator datas = {orders} page = {this.props.page} path = {Shop.path}>
               <div>
-                  <div className = 'filter'>
-                    <div>
-                      <input placeholder = 'Предмет' className = 'filter__input filter__input_full' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
-                    </div>
-                    <div>
-                      <span>Цена от</span>
-                      <input placeholder = '0' className = 'filter__input' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
-                    </div>
-                    <div>
-                      <span>до</span>
-                      <input placeholder = '999' className = 'filter__input' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
-                    </div>
+                <div className = 'filter'>
+                  <div>
+                    <input placeholder = 'Предмет' className = 'filter__input filter__input_full' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
                   </div>
-                  <div className = 'filter'>
-                    <input type = 'radio' name = 'filter' id = {typeSort.byDate} className = 'filter__radio' />
-                    <label for = {typeSort.byDate} className = 'filter__button'>ПО ДАТЕ</label>
-                    <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter__radio' />
-                    <label for = {typeSort.byString} className = 'filter__button'>ПО НАЗВАНИЮ</label>
-                    <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter__radio' />
-                    <label for = {typeSort.byNumber} className = 'filter__button'>ПО ЦЕНЕ</label>
+                  <div>
+                    <span>Цена от</span>
+                    <input placeholder = '0' className = 'filter__input' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
                   </div>
+                  <div>
+                    <span>до</span>
+                    <input placeholder = '999' className = 'filter__input' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
+                  </div>
+                </div>
+                <div className = 'filter'>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byDate} className = 'filter__radio' />
+                  <label for = {typeSort.byDate} className = 'filter__button'>ПО ДАТЕ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter__radio' />
+                  <label for = {typeSort.byString} className = 'filter__button'>ПО НАЗВАНИЮ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter__radio' />
+                  <label for = {typeSort.byNumber} className = 'filter__button'>ПО ЦЕНЕ</label>
+                </div>
               </div>
             </Paginator>
           </div>
