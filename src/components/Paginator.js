@@ -13,12 +13,12 @@ class Paginator extends Component {
     const startElement = (+this.props.page > lastPage || !+this.props.page) ? 0 : (+this.props.page - 1) * contentСoverage
     const datas = this.props.datas.slice(startElement, startElement + contentСoverage)
     return(
-      <div id = 'contents'>
+      <div>
         {this.props.children}
-        <div id = 'items'>
+        <div id = 'pagination-wrapper'>
           {datas}
+          <Pages currentPage = {this.props.page || 1} datasLen = {datasLen} path = {this.props.path} contentСoverage = {contentСoverage} />
         </div>
-        <Pages currentPage = {this.props.page || 1} datasLen = {datasLen} path = {this.props.path} contentСoverage = {contentСoverage} />
       </div>
     )
   }

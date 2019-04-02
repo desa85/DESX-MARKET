@@ -59,7 +59,6 @@ class App extends Component {
       <Router>
         <Switch>
           <div>
-            <div className = 'shadow'></div>
             <Route exact path = '/' render = {main} />
             <Route path = {Shop.path + '/:page'} component = {shop} />
             <Route exact path = {Shop.path} component = {shop} />

@@ -18,7 +18,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "watch-css": "less-watch-compiler ./src ./src index.less",
+    "start": "npm run watch-css | react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
@@ -34,7 +35,8 @@
   ],
   "devDependencies": {
     "jest": "23.6.0",
-    "jest-localstorage-mock": "^2.4.0"
+    "jest-localstorage-mock": "^2.4.0",
+    "less-watch-compiler": "^1.13.0"
   },
   "jest": {
     "setupFile": [

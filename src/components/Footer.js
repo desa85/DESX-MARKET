@@ -6,7 +6,7 @@ class Footer extends Component {
       <footer id = 'footer'>
         <div>
         <p>85desa@gmail.com</p>
-        <p>github.com/desa85</p>
+        <p><a href = 'https://github.com/desa85' target='_blank'>github.com/desa85</a></p>
         </div>
         <div>
           <p>Все права защищены</p>

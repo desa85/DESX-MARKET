@@ -11,7 +11,7 @@ class Inventory extends Component {
     this.state = {
       modalItemName: '',
       modalItemIconPath: '',
-      modalInput: '0',
+      modalInput: '',
       modalUserItemId: '',
       isModal: false,
       items: this.items()
@@ -39,7 +39,7 @@ class Inventory extends Component {
         modalItemName: itemName,
         modalItemIconPath: itemIconPath,
         modalUserItemId: userItemId,
-        modalInput: '0'
+        modalInput: ''
       })
   }
 
@@ -50,18 +50,18 @@ class Inventory extends Component {
   
   render() {
     const modal = (
-        <div className = 'shadow foreground' onClick = {e => {if (e.target.className === 'shadow foreground') this.toggleModal.bind(this)()}} >
+        <div className = 'shadow' onClick = {e => {if (e.target.className === 'shadow') this.toggleModal.bind(this)()}} >
           <div className = 'modal-inventory'>
-            <div className = 'modal-inventory-name'>{this.state.modalItemName}</div>
-            <div className = 'modal-inventory-img'><img src = {this.state.modalItemIconPath} /></div>
-            <div className = 'input-form  modal-inventory-form' >
+            <div className = 'modal-inventory__name'>{this.state.modalItemName}</div>
+            <div className = 'modal-inventory__img'><img src = {this.state.modalItemIconPath} /></div>
             <input
+              className = 'modal-inventory__input'
               value = {this.state.modalInput} 
               onChange = {e => {
                 let value = e.target.value 
                 this.setState({modalInput: value})
-              }} /><span>р</span></div>
-              <button className = 'input-form modal-inventory-button'
+              }} />
+              <button className = 'modal-inventory__button'
                 onClick = {() => {
                   if (!this.state.modalInput.match(/^[0-9]+(\.[0-9]{1,2})?$/i) || +this.state.modalInput === 0) return
                   this.clickModal.bind(this)() 
@@ -78,7 +78,9 @@ class Inventory extends Component {
       <div>
         {this.state.isModal && modal}
         <Header user = {this.props.user} path = {Inventory.path} />
-        <Paginator datas = {this.state.items} page = {this.props.page} path = {Inventory.path} />
+        <div id = 'content'>
+          <Paginator datas = {this.state.items} page = {this.props.page} path = {Inventory.path} />
+        </div>
         <Footer />
       </div>
     )

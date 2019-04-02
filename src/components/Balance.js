@@ -45,19 +45,18 @@ class Balance extends Component {
 
   render() {
     const norm = (
-      <div id = "balance-window">
-        <form>
-          <div>{'Ваш баланс:\n' + (this.props.user && this.props.user.money)}</div>
-          <input className = 'input-form' value = {this.state.input} onChange = {(e) => {this.setState({input: e.target.value})}}/>
-          <button className = "button" onClick = {(e) => this.clickButton(e)}>Пополнить баланс</button>
-        </form>
-      </div>
+      <form className = "balance-window">
+        <div>{'Ваш баланс:'}</div>
+        <div>{(this.props.user && this.props.user.money)}</div>
+        <input className = 'balance-window__input' value = {this.state.input} onChange = {(e) => {this.setState({input: e.target.value})}}/>
+        <button className = "balance-window__button" onClick = {(e) => this.clickButton(e)}>Пополнить баланс</button>
+      </form>
     )
 
     const success = (
-      <div id = 'login-window'>
-        <h2 id = 'headline-login'>Успех! Баланс пополнен</h2>
-        <h3 className = 'black-message' >  +{this.state.input}р</h3>
+      <div className = 'message-window'>
+        <h1 >Успех! Баланс пополнен</h1>
+        <h2 className = 'black-message' >  +{this.state.input}р</h2>
         <form id = 'authorization-form'>
           <Link to = "/shop"><button id = 'button-login'  className = "button" >ок</button> </Link>
         </form>
@@ -65,9 +64,9 @@ class Balance extends Component {
     )
 
     const error = (
-      <div id = 'login-window'>
-        <h2 id = 'headline-login'>Неудача</h2>
-        <h3 className = 'black-message' >  {this.state.err}</h3>
+      <div className = 'message-window'>
+        <h1 id = 'headline-login'>Неудача</h1>
+        <h2 className = 'black-message' >  {this.state.err}</h2>
         <form id = 'authorization-form'>
           <button id = 'button-login'  className = "button" onClick = {e => {e.preventDefault(); this.setState({action: NORMAL})}}>ок</button>
         </form>
@@ -86,7 +85,9 @@ class Balance extends Component {
         <Redirect to="/login" /> :
         <div id = 'wrapper'>
           <Header user = {this.props.user} />
-            {render()}
+            <div id = "content">
+              {render()}
+            </div>
           <Footer />
         </div>)
 

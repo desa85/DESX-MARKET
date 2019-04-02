@@ -41,16 +41,16 @@ class Shop extends Component {
 
   render() {
     const modal = (
-      <div className = 'shadow foreground' onClick = {e => {if (e.target.className === 'shadow foreground') this.toggleModal.bind(this)()}} >
+      <div className = 'shadow' onClick = {e => {if (e.target.className === 'shadow') this.toggleModal.bind(this)()}} >
         <div className = 'modal-inventory'>
-          <div className = 'modal-inventory-err'>
+          <div className = 'modal-inventory__err'>
               <p>Недостаточно средств</p>
-              <div>
+              <div className = 'modal-inventory__info'>
                 <p>Ваш Баланс: <span>{this.state.modalValue.userBalance}</span></p>
                 <p>Стоимость предмета: <span>{this.state.modalValue.price}</span></p>
               </div>
               <p>Вам не хватает: <span>{this.state.modalValue.lacks}</span></p>
-              <button className = 'input-form modal-inventory-button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
+              <button className = 'modal-inventory__button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
           </div>
         </div>
       </div>
@@ -95,34 +95,33 @@ class Shop extends Component {
         <div>
           <Header user = {this.props.user} path = {Shop.path} />
           {/*TODO refactoring (logic to database)*/}
-          <Paginator datas = {orders} page = {this.props.page} path = {Shop.path}>
-            <div id = 'contents'>
-                <div id = 'search'>
+          <div id = 'content'>
+            <Paginator datas = {orders} page = {this.props.page} path = {Shop.path}>
+              <div>
+                <div className = 'filter'>
                   <div>
-                    <input placeholder = 'Предмет' className = 'input-form-search' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
+                    <input placeholder = 'Предмет' className = 'filter__input filter__input_full' value = {this.state.loginFilter} onChange = {e => this.setState({loginFilter: e.target.value})} />
                   </div>
                   <div>
                     <span>Цена от</span>
-                    <input placeholder = '0' className = 'input-form-search' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
+                    <input placeholder = '0' className = 'filter__input' value = {this.state.moneyFilterFrom} onChange = {e => this.setState({moneyFilterFrom: e.target.value})} />
                   </div>
                   <div>
                     <span>до</span>
-                    <input placeholder = '999' className = 'input-form-search' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
+                    <input placeholder = '999' className = 'filter__input' value = {this.state.moneyFilterTo} onChange = {e => this.setState({moneyFilterTo: e.target.value})} />
                   </div>
-                    
                 </div>
-                <div id = 'filter'>
-                  <input type = 'radio' name = 'filter' id = {typeSort.byDate} className = 'filter-radio' />
-                  <label for = {typeSort.byDate} className = 'filter-button'>ПО ДАТЕ</label>
-                  <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter-radio' />
-                  <label for = {typeSort.byString} className = 'filter-button'>ПО НАЗВАНИЮ</label>
-                  <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter-radio' />
-                  <label for = {typeSort.byNumber} className = 'filter-button'>ПО ЦЕНЕ</label>
+                <div className = 'filter'>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byDate} className = 'filter__radio' />
+                  <label for = {typeSort.byDate} className = 'filter__button'>ПО ДАТЕ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byString} className = 'filter__radio' />
+                  <label for = {typeSort.byString} className = 'filter__button'>ПО НАЗВАНИЮ</label>
+                  <input type = 'radio' name = 'filter' id = {typeSort.byNumber} className = 'filter__radio' />
+                  <label for = {typeSort.byNumber} className = 'filter__button'>ПО ЦЕНЕ</label>
                 </div>
-                <div id = 'items'>
-                </div>
-            </div>
-          </Paginator>
+              </div>
+            </Paginator>
+          </div>
           <Footer />
         </div>
       </div>
@@ -130,7 +129,7 @@ class Shop extends Component {
   }
 
   componentDidMount() {
-    const radio = document.getElementsByClassName('filter-radio')
+    const radio = document.getElementsByClassName('filter__radio')
       for (let i = 0; i <= radio.length -1; i++) {
         radio[i].addEventListener('change', () => this.setState({sortBy: radio[i].id}))
       }

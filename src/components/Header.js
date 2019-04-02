@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     return (
       <div id = "header">
-        <div id = "logo">DESX</div>
+        <div id = "header__logo">DESX</div>
         <Menu path = {this.props.path}/>
         <Profile userName = {this.props.user.login} cash = {this.props.user.money}/>
       </div>
