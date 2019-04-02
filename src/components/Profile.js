@@ -19,9 +19,9 @@ constructor(props) {
           </div>
         </div>
         <ul className = 'dropdown'>
-          <li><Link to = '/balance' className = 'dropDown__a'>ПОПОЛНИТЬ БАЛАНС</Link></li>
-          <li><Link to = '' className = 'dropDown__a'>НАСТРОЙКИ</Link></li>
-          <li><Link to = '' className = 'dropDown__a' onClick = {() => sessionStorage.clear()}>ВЫЙТИ</Link></li>
+          <li><Link to = '/balance' className = 'dropdown__a'>ПОПОЛНИТЬ БАЛАНС</Link></li>
+          <li><Link to = '' className = 'dropdown__a'>НАСТРОЙКИ</Link></li>
+          <li><Link to = '' className = 'dropdown__a' onClick = {() => sessionStorage.clear()}>ВЫЙТИ</Link></li>
         </ul>
       </div>
     )

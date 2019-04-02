@@ -80,6 +80,7 @@ button:hover {
   width: 100vw;
   height: 100vh;
   background-color: @main-color-black;
+  z-index: 2;
 }
 
 .login-window {
@@ -108,10 +109,10 @@ button:hover {
     color: black;
     .options;
     .input;
+    padding: 12px;
     &::placeholder {
       color: #AAA;
       font-size: 18px;
-      padding: 12px;
     }
   }
 
@@ -209,7 +210,7 @@ button:hover {
     }
   }
 
-  &:hover + .dropDown{
+  &:hover + .dropdown{
     height: 100px;
   }
 }
@@ -239,7 +240,7 @@ button:hover {
   }
 }
 
-.dropDown:hover {
+.dropdown:hover {
   height: 100px;
 }
 
@@ -355,6 +356,7 @@ button:hover {
 
 .pages {
   margin-top: 12px;
+  margin-bottom: 12px;
   
   &__link {
     @size: 38px;
@@ -485,10 +487,12 @@ button:hover {
   }
 
   &__input {
-    width: 100px;
-    height: 40px;
+    width: 88px;
+    height: 28px;
     margin-top: 24px;
     color: #222;
+    font-size: 18px;
+    padding: 12px;
 
     &::after {
       content: '$';
@@ -545,15 +549,16 @@ button:hover {
     font-size: 48px;
   }
 
-  input {
+  &__input {
     .input;
+    width: 240px;
     height: 80px;
   }
 
-  button {
+  &__button {
     .button;
-    width: 300px;
-    height: 100px;
+    width: 240px;
+    height: 80px;
   }
 }
 
@@ -643,7 +648,7 @@ button:hover {
     margin: 12px;
   }
 
-  .dropDown {
+  .dropdown {
     height: 60px;
     max-height: 60px;
     position: absolute;

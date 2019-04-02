@@ -11,7 +11,7 @@ class Inventory extends Component {
     this.state = {
       modalItemName: '',
       modalItemIconPath: '',
-      modalInput: '0',
+      modalInput: '',
       modalUserItemId: '',
       isModal: false,
       items: this.items()
@@ -39,7 +39,7 @@ class Inventory extends Component {
         modalItemName: itemName,
         modalItemIconPath: itemIconPath,
         modalUserItemId: userItemId,
-        modalInput: '0'
+        modalInput: ''
       })
   }
 

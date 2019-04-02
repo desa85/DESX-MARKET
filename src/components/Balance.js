@@ -46,9 +46,10 @@ class Balance extends Component {
   render() {
     const norm = (
       <form className = "balance-window">
-        <div>{'Ваш баланс: ' + (this.props.user && this.props.user.money)}</div>
-        <input className = 'input-form' value = {this.state.input} onChange = {(e) => {this.setState({input: e.target.value})}}/>
-        <button className = "button" onClick = {(e) => this.clickButton(e)}>Пополнить баланс</button>
+        <div>{'Ваш баланс:'}</div>
+        <div>{(this.props.user && this.props.user.money)}</div>
+        <input className = 'balance-window__input' value = {this.state.input} onChange = {(e) => {this.setState({input: e.target.value})}}/>
+        <button className = "balance-window__button" onClick = {(e) => this.clickButton(e)}>Пополнить баланс</button>
       </form>
     )
 
