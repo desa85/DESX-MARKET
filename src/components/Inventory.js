@@ -67,7 +67,7 @@ class Inventory extends Component {
                   this.clickModal.bind(this)() 
                   this.setState({items: this.items()
                 })}} 
-              >{`продать за ${+this.state.modalInput || 0} р`}</button>
+              >{`продать за ${+this.state.modalInput || 0} `}<span className = 'money'></span></button>
           </div>
         </div>
     )

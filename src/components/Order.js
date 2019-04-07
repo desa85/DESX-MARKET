@@ -16,6 +16,7 @@ class Item extends Component {
         }} >
             <div className = 'item__price' >
                 {this.props.price}
+                <span className = 'money'></span>
             </div>
             <button className = 'item__button' >КУПИТЬ</button>
         </div>

@@ -15,7 +15,7 @@ class User extends Component {
           {this.props.userName}
         </div>
         <div className = 'user-block__cash'>
-          {`${this.props.cash}р`}
+          {`${this.props.cash}`}<span className = 'money'></span>
         </div>
           <button className = 'user-block__button' >Инвентарь</button>
       </div>

@@ -46,10 +46,10 @@ class Shop extends Component {
           <div className = 'modal-inventory__err'>
               <p>Недостаточно средств</p>
               <div className = 'modal-inventory__info'>
-                <p>Ваш Баланс: <span>{this.state.modalValue.userBalance}</span></p>
-                <p>Стоимость предмета: <span>{this.state.modalValue.price}</span></p>
+                <p>Ваш Баланс: <span>{this.state.modalValue.userBalance}</span><span className = 'money'></span></p>
+                <p>Стоимость предмета: <span>{this.state.modalValue.price}</span><span className = 'money'></span></p>
               </div>
-              <p>Вам не хватает: <span>{this.state.modalValue.lacks}</span></p>
+              <p>Вам не хватает: <span>{this.state.modalValue.lacks}</span><span className = 'money'></span></p>
               <button className = 'modal-inventory__button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
           </div>
         </div>

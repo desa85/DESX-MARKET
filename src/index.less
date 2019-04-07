@@ -75,12 +75,32 @@ button:hover {
   font-size: 18px;
 }
 
+.fill {
+  background-color: pink;
+  color: pink;
+}
+
 .shadow {
   position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: @main-color-black;
   z-index: 2;
+}
+
+.money-ico {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-image: url('./logo.svg');
+  background-size: cover;
+  margin-left: 6px;
+  top: 3px;
+}
+
+.money {
+  .money-ico;
 }
 
 .login-window {
@@ -204,9 +224,9 @@ button:hover {
     font-size: 18spx;
     
     &::after {
-      content: '$';
-      color: #FFF;
-      margin: 1pt;
+      content: '';
+      .money-ico;
+      margin-left: 3px;
     }
   }
 

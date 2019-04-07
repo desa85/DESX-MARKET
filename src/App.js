@@ -11,7 +11,6 @@ import Balance from './components/Balance.js'
 import Inventory from './components/Inventory.js'
 import Users from './components/Users.js'
 
-
 const userDb = new UserDatabase()
 const itemDb = new ItemDatabase()
 
