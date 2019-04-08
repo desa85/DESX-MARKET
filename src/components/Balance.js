@@ -57,7 +57,7 @@ class Balance extends Component {
     const success = (
       <div className = 'message-window'>
         <h1 >Успех! Баланс пополнен</h1>
-        <h2 className = 'black-message' >  +{this.state.input}<span className = 'money'></span></h2>
+        <h2 className = 'black-message' >  <Money money = {this.state.input} /></h2>
         <form id = 'authorization-form'>
           <Link to = "/shop"><button id = 'button-login'  className = "button" >ок</button> </Link>
         </form>

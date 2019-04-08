@@ -5,6 +5,7 @@ import Footer from './Footer'
 import Pages from './Pages'
 import Order from './Order'
 import Paginator from './Paginator'
+import Money from './Money.js'
 
 class Shop extends Component {
   constructor(props) {
@@ -46,10 +47,10 @@ class Shop extends Component {
           <div className = 'modal-inventory__err'>
               <p>Недостаточно средств</p>
               <div className = 'modal-inventory__info'>
-                <p>Ваш Баланс: <span>{this.state.modalValue.userBalance}</span><span className = 'money'></span></p>
-                <p>Стоимость предмета: <span>{this.state.modalValue.price}</span><span className = 'money'></span></p>
+                <p>Ваш Баланс: <Money money = {this.state.modalValue.userBalance} /></p>
+                <p>Стоимость предмета: <Money money = {this.state.modalValue.price} /></p>
               </div>
-              <p>Вам не хватает: <span>{this.state.modalValue.lacks}</span><span className = 'money'></span></p>
+              <p>Вам не хватает: <Money money = {this.state.modalValue.lacks} /></p>
               <button className = 'modal-inventory__button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
           </div>
         </div>
