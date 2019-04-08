@@ -91,12 +91,13 @@ button:hover {
 .money-ico {
   display: inline-block;
   position: relative;
-  width: 20px;
-  height: 20px;
-  background-image: url('./logo.svg');
+  width: 1em;
+  height: 1em;
+  background-image: url('./currency.svg');
   background-size: cover;
   margin-left: 6px;
   top: 3px;
+  opacity: 0.7;
 }
 
 .money {
@@ -221,13 +222,9 @@ button:hover {
 
   &__cash {
     color: #FFFFFF99;
-    font-size: 18spx;
+    font-size: 18pt;
     
-    &::after {
-      content: '';
-      .money-ico;
-      margin-left: 3px;
-    }
+    
   }
 
   &:hover + .dropdown{
@@ -322,7 +319,7 @@ button:hover {
     height: @height / 6;
     border-bottom: 1px solid #EEE;
     text-align: center;
-    font-size: 18px;
+    font-size: 14pt;
     padding: 3px;
     line-height: 2em;
   }
@@ -443,9 +440,9 @@ button:hover {
     }
 
     &_active {
-      font-size: 18px;
+      font-size: 14pt;
       
-      span, p {
+      span, p, div {
         color: rgb(255, 136, 0);
       }
     }
@@ -454,7 +451,7 @@ button:hover {
   &__price {
     display: block;
     float: left;
-    font-size: 28px;
+    font-size: 24pt;
     width: 40%;
     height: 65px;
     margin-left: 12px;
@@ -566,7 +563,7 @@ button:hover {
   background-color: @main-color;
 
   div {
-    font-size: 48px;
+    font-size: 36pt;
   }
 
   &__input {

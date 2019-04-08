@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import Header from './Header'
 import Footer from './Footer'
+import Money from './Money'
 
 const NORMAL = "normal"
 const SUCCESS = "success"
@@ -47,7 +48,7 @@ class Balance extends Component {
     const norm = (
       <form className = "balance-window">
         <div>{'Ваш баланс:'}</div>
-        <div>{(this.props.user && this.props.user.money)}<span className = 'money'></span></div>
+        <Money money = {(this.props.user && this.props.user.money)} />
         <input className = 'balance-window__input' value = {this.state.input} onChange = {(e) => {this.setState({input: e.target.value})}}/>
         <button className = "balance-window__button" onClick = {(e) => this.clickButton(e)}>Пополнить баланс</button>
       </form>

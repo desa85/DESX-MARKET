@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'
+import Money from './Money'
 
 class Profile extends Component {
 constructor(props) {
@@ -12,7 +13,7 @@ constructor(props) {
         <div id = 'profile'>
           <div>
             <div id = 'profile__username'>{this.props.userName}</div>
-            <div id = 'profile__cash'>{this.props.cash}</div>
+            <Money id = 'profile__cash' money = {this.props.cash} />
           </div>
           <div id = 'profile__avatar'>
 
