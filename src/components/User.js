@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Money from './Money'
 
 class User extends Component {
   constructor(props) {
@@ -14,9 +15,7 @@ class User extends Component {
         <div className = 'user-block__name'>
           {this.props.userName}
         </div>
-        <div className = 'user-block__cash'>
-          {`${this.props.cash}р`}
-        </div>
+        <Money className = 'user-block__cash' money = {this.props.cash} />
           <button className = 'user-block__button' >Инвентарь</button>
       </div>
     )

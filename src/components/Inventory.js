@@ -4,6 +4,7 @@ import Item from './Item.js'
 import Header from './Header'
 import Footer from './Footer'
 import Paginator from './Paginator.js'
+import Money from './Money.js'
 
 class Inventory extends Component {
   constructor(props) {
@@ -67,7 +68,7 @@ class Inventory extends Component {
                   this.clickModal.bind(this)() 
                   this.setState({items: this.items()
                 })}} 
-              >{`продать за ${+this.state.modalInput || 0} р`}</button>
+              ><Money money = {`продать за ${+this.state.modalInput || 0} `} /></button>
           </div>
         </div>
     )
