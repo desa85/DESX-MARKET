@@ -78,7 +78,7 @@ class Inventory extends Component {
       <Redirect to="/login" /> :
       <div>
         {this.state.isModal && modal}
-        <Header user = {this.props.user} path = {Inventory.path} />
+        <Header user = {this.props.user} path = {Inventory.path} db = {this.props.db} />
         <div id = 'content'>
           <Paginator datas = {this.state.items} page = {this.props.page} path = {Inventory.path} />
         </div>

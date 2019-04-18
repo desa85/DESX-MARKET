@@ -40,13 +40,13 @@ class Users extends Component {
         money: moneyFilter
       },
       sortBy: this.state.sortBy
-    }).map(user => <User userImgPath = {5} userName = {user.login} cash = {user.money} />)
+    }).map(user => <User userAvatar = {user.avatar} userName = {user.login} cash = {user.money} />)
 
       return (
         !this.props.db.user.getCurrentUser() ?
         <Redirect to="/login" /> :
         <div>
-          <Header user = {this.props.user} path = {Users.path} />
+          <Header user = {this.props.user} path = {Users.path} db = {this.props.db} />
           <div id = 'content'>
             <Paginator page = {this.props.page} datas = {users} path = {Users.path}>
               <div>
