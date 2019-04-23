@@ -20,6 +20,7 @@ fixPoint(value) {
 
 chosePoint(value) {
   this.setState({avatar: value})
+  return 1
 }
 
 toggleModalView() {

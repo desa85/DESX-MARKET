@@ -5,6 +5,8 @@ constructor(props) {
   super(props)
 
   this.avatars = new this.round(9, 5, this.props) 
+  this.scroll = true
+  this.swipe = true
   this.state = {
     pointer: this.avatars
   }
@@ -26,15 +28,35 @@ round(end, cut, props) {
 }
 
 wheel(e) {
-  e.deltaY < 0 ? this.state.pointer.back() : this.state.pointer.next()
-  this.setState({pointer: this.state.pointer})
+  if (this.scroll) {
+    if (e.touches && typeof this.swipe === 'boolean') {
+      this.swipe = e.touches[0].clientX
+    } else if (e.touches) {
+      this.swipe = (e.touches[0].clientX - this.swipe) > 0
+      this.swipe ? this.state.pointer.back() : this.state.pointer.next()
+      this.scroll = !this.scroll
+      setTimeout(() => this.scroll = !this.scroll, 400)
+      console.log(this.swipe)
+    } else {
+      e.deltaY < 0 ? this.state.pointer.back() : this.state.pointer.next()
+      this.setState({pointer: this.state.pointer})
+      this.scroll = !this.scroll
+      setTimeout(() => this.scroll = !this.scroll, 200)
+    }
+    
+    
+  }
 }
 
 
 
   render() {
     return (
-      <div className = {this.props.className} onWheel = {e => this.wheel.bind(this, e)() } style = {(this.state.pointer >= 0) ? {} : {justifyContent: 'flex-end'} } >
+      <div className = {this.props.className} 
+        onWheel = {e => this.wheel.bind(this, e)() } 
+        onTouchMove = {e => this.wheel.bind(this, e)()}
+        style = {(this.state.pointer >= 0) ? {} : {justifyContent: 'flex-end'} } 
+        >
         {this.state.pointer.cut().map(avatar => {
           return (
             <div 

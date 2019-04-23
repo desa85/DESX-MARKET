@@ -51,6 +51,10 @@ h2 {
   text-align: center;
   font-size: 36px;
 }
+.z-index {
+  position: relative;
+  z-index: 1;
+}
 
 button:hover {
   cursor: pointer;
@@ -128,7 +132,7 @@ button:hover {
   background-color: @main-color-black;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: 100;
 }
 
 .money-ico {
@@ -688,14 +692,12 @@ button:hover {
 
   .shadow {
     background-color: @main-color-black;
-    z-index: 100;
   }
 
   body {
     display: flex;
     flex-direction: column;
   }
-
 
   .login-window {
     background-color: #00000000;
@@ -735,7 +737,6 @@ button:hover {
     @margin: @height-footer + @height-header;
   
     min-height: calc(100vh - @margin - @border-size * 2);
-  
   }
 
   .menu {
@@ -771,7 +772,6 @@ button:hover {
   }
 
   .filter {
-    position: relative;
     width: calc(100% - 12px);
     flex-direction: column;
     border: none;
@@ -781,6 +781,7 @@ button:hover {
       margin: 0;
       margin-bottom: 12px;
       width: 50%;
+      opacity: 1;
     }
 
     span {
@@ -868,6 +869,28 @@ button:hover {
     position: absolute;
     width: 100vw;
     height: 70vh;
-    z-index: 100;
+    z-index: 110;
+  }
+
+  .round {
+  
+    &__0 {
+      width: 30px;
+      height: 30px;
+    }
+  
+    &__1 {
+      width: 50px;
+      height: 50px;
+    }
+  
+    &__2 {
+      width: 80px;
+      height: 80px;
+    }
+  
+    &__false {
+      display: none;
+    }
   }
 }
