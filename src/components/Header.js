@@ -8,7 +8,7 @@ class Header extends Component {
       <div id = "header">
         <div id = "header__logo">DESX</div>
         <Menu path = {this.props.path}/>
-        <Profile userName = {this.props.user.login} cash = {this.props.user.money}/>
+        <Profile userName = {this.props.user.login} cash = {this.props.user.money} db = {this.props.db}/>
       </div>
     )
   }

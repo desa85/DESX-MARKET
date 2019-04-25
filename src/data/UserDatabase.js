@@ -7,7 +7,8 @@ class UserDatabase extends DataBase {
     this.LOGIN = 'login'
     this.MONEY = 'money'
     this.CREATED = 'created'
-    this.arguments = [this.LOGIN, this.MONEY, this.CREATED]
+    this.AVATAR = 'avatar'
+    this.arguments = [this.LOGIN, this.MONEY, this.CREATED, this.AVATAR]
   }
 
   getId(login) {
@@ -17,10 +18,10 @@ class UserDatabase extends DataBase {
   generateFakeUsers() {
     if (this.isEmpty()) {
       return [
-        this.insert('Lexa', 7800, new Date('2019', '03', '05')).id,
-        this.insert('Oleg', 3, new Date('2019', '03', '06')).id,
-        this.insert('Macho', 8000, new Date('2019', '03', '04')).id,
-        ...Array(42).fill(0).map((bot, index) => this.insert('bot' + index, 8000, new Date('2019', '03', '07')).id)
+        this.insert('Lexa', 7800, new Date('2019', '03', '05'), 1).id,
+        this.insert('Oleg', 3, new Date('2019', '03', '06'), 1).id,
+        this.insert('Macho', 8000, new Date('2019', '03', '04'), 1).id,
+        ...Array(42).fill(0).map((bot, index) => this.insert('bot' + index, 8000, new Date('2019', '03', '07'), 1).id)
       ]
     } else return []
   }

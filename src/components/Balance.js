@@ -85,7 +85,7 @@ class Balance extends Component {
      return (!this.props.user ? 
         <Redirect to="/login" /> :
         <div id = 'wrapper'>
-          <Header user = {this.props.user} />
+          <Header user = {this.props.user} db = {this.props.db} />
             <div id = "content">
               {render()}
             </div>
