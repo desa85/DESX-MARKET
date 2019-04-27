@@ -16,11 +16,7 @@ class Authorization extends Component {
 
   render() {
     const db = this.props.db
-    const validateLogin = (login) => {
-      let reg = /^[A-z0-9_.]+$/g
-      let result = login.search(reg)
-      return !!~result
-  }
+    const validateLogin = this.props.db.validateStringDate
 
   const checkValidateLogin = () =>  {
     const userDb = db.user

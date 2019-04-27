@@ -14,7 +14,6 @@ class ChoseAvatar extends Component {
   slider(avatarsCount, сountShowAvatars, props) {
     var avatarNumber = +props.selectedAvatar > 2 ? +props.selectedAvatar - 2 : +props.selectedAvatar + avatarsCount - 2
 
-    this.avatarNumber = () => avatarNumber
     this.selectAvatar = () => (avatarNumber + 2) % avatarsCount || avatarsCount
     this.next = () => {
       avatarNumber === avatarsCount ? avatarNumber = 1 : avatarNumber++

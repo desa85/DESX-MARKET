@@ -32,12 +32,19 @@ class App extends Component {
       item: itemDb,
       userItem: userItemDb,
       order: OrderDb,
-      updateUser: () => this.updateUser()
+      updateUser: () => this.updateUser(),
+      validateStringDate: value => this.validateStringDate(value)
     }
     this.user = this.db.user.getCurrentUser()
     this.state = {
       user: this.user
     }
+  }
+
+  validateStringDate(value) {
+    let reg = /^[A-z0-9_.]+$/g
+    let result = value.search(reg)
+    return !!~result
   }
 
   updateUser() {

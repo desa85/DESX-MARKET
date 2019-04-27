@@ -6,9 +6,7 @@ import ChoseAvatar from './ChoseAvatar.js'
 
 class Profile extends Component {
   constructor(props) {
-      super(props)
-      this.ERRORVALIDATION = 'Невалидные данные'
-      this.ERRORUSEREXIST = 'Такой ник уже существует'
+      super(props)    
       this.state = {
         modalView: false,
         selectedAvatar: this.props.db.user.getCurrentUser().avatar,
@@ -16,12 +14,6 @@ class Profile extends Component {
         errorMessage: '',
       }
   }
-
-  validateLogin(login) {
-    let reg = /^[A-z0-9_.]+$/g
-    let result = login.search(reg)
-    return !~result
-}
 
   isExistUser(name) {
     const user = name
@@ -50,12 +42,15 @@ class Profile extends Component {
   }
 
   click() {
+    const NICK_VALIDATION_ERROR = 'Невалидные данные'
+    const NICK_ALREADY_EXISTS_ERROR = 'Такой ник уже существует'
     let errorMessage = ''
+
     this.fixPoint(this.state.selectedAvatar)
     if(this.state.inputName) {
       this.state.errorMessage && this.setState( {errorMessage: ''} )
-      this.validateLogin(this.state.inputName) && (errorMessage = this.ERRORVALIDATION) ||
-      this.isExistUser(this.state.inputName) && (errorMessage = this.ERRORUSEREXIST)
+      !this.props.db.validateStringDate(this.state.inputName) && (errorMessage = NICK_VALIDATION_ERROR) ||
+      this.isExistUser(this.state.inputName) && (errorMessage = NICK_ALREADY_EXISTS_ERROR)
       !errorMessage && this.changeName.bind(this)(this.state.inputName)
     }
     !errorMessage && this.toggleModalView()
@@ -64,7 +59,7 @@ class Profile extends Component {
     
   }
 
-  render() {    
+  render() {  
     return (
       <div>
         <div id = 'profile'>
@@ -100,7 +95,11 @@ class Profile extends Component {
         <Modal view = {this.state.modalView} toggle = {this.toggleModalView.bind(this)}>
           <div className = 'small-windiow'>
             <div className = 'small-windiow__header'>НАСТРОЙКИ</div>
-            <ChoseAvatar selectedAvatar = {this.state.selectedAvatar} chose = {this.chosePoint.bind(this)} className = 'small-windiow__avatars' />
+            <ChoseAvatar 
+              selectedAvatar = {this.state.selectedAvatar} 
+              chose = {this.chosePoint.bind(this)} 
+              className = 'small-windiow__avatars' 
+            />
             <input 
               className = 'small-windiow__input' 
               placeholder = 'NAME' 
