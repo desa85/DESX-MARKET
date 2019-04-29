@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import Money from './Money'
 import Modal from './Modal.js'
 import ChoseAvatar from './ChoseAvatar.js'
+import helper from '../helper.js'
 
 class Profile extends Component {
   constructor(props) {
-      super(props)    
+      super(props) 
       this.state = {
         modalView: false,
         selectedAvatar: this.props.db.user.getCurrentUser().avatar,
@@ -16,9 +17,7 @@ class Profile extends Component {
   }
 
   isExistUser(name) {
-    const user = name
-    if (this.props.db.user.getId(user)) return true
-    return false
+    return !!this.props.db.user.getId(name)
   }
 
   fixPoint(value) {
@@ -49,14 +48,12 @@ class Profile extends Component {
     this.fixPoint(this.state.selectedAvatar)
     if(this.state.inputName) {
       this.state.errorMessage && this.setState( {errorMessage: ''} )
-      !this.props.db.validateStringDate(this.state.inputName) && (errorMessage = NICK_VALIDATION_ERROR) ||
+      !helper.validateString(this.state.inputName) && (errorMessage = NICK_VALIDATION_ERROR) ||
       this.isExistUser(this.state.inputName) && (errorMessage = NICK_ALREADY_EXISTS_ERROR)
       !errorMessage && this.changeName.bind(this)(this.state.inputName)
     }
     !errorMessage && this.toggleModalView()
     this.setState( {errorMessage: errorMessage} )
-
-    
   }
 
   render() {  

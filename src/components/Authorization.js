@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Main from './Main.js'
 import Shop from './Shop.js'
 import { Route, Redirect } from 'react-router'
+import helper from '../helper.js'
 
 class Authorization extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Authorization extends Component {
 
   render() {
     const db = this.props.db
-    const validateLogin = this.props.db.validateStringDate
+    const validateLogin = helper.validateString
 
   const checkValidateLogin = () =>  {
     const userDb = db.user
