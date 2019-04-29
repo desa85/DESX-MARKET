@@ -3,14 +3,21 @@ import { Link } from 'react-router-dom'
 import Money from './Money'
 import Modal from './Modal.js'
 import ChoseAvatar from './ChoseAvatar.js'
+import helper from '../helper.js'
 
 class Profile extends Component {
   constructor(props) {
-      super(props)
+      super(props) 
       this.state = {
         modalView: false,
-        selectedAvatar: this.props.db.user.getCurrentUser().avatar
+        selectedAvatar: this.props.db.user.getCurrentUser().avatar,
+        inputName: '',
+        errorMessage: '',
       }
+  }
+
+  isExistUser(name) {
+    return !!this.props.db.user.getId(name)
   }
 
   fixPoint(value) {
@@ -27,7 +34,30 @@ class Profile extends Component {
     this.setState({modalView: !this.state.modalView})
   }
 
-  render() {    return (
+  changeName(value) {
+    const user = this.props.db.user.sessionUserId()
+    this.props.db.user.changeData(user, 'login', value)
+    this.props.db.updateUser()
+  }
+
+  click() {
+    const NICK_VALIDATION_ERROR = 'Невалидные данные'
+    const NICK_ALREADY_EXISTS_ERROR = 'Такой ник уже существует'
+    let errorMessage = ''
+
+    this.fixPoint(this.state.selectedAvatar)
+    if(this.state.inputName) {
+      this.state.errorMessage && this.setState( {errorMessage: ''} )
+      !helper.validateString(this.state.inputName) && (errorMessage = NICK_VALIDATION_ERROR) ||
+      this.isExistUser(this.state.inputName) && (errorMessage = NICK_ALREADY_EXISTS_ERROR)
+      !errorMessage && this.changeName.bind(this)(this.state.inputName)
+    }
+    !errorMessage && this.toggleModalView()
+    this.setState( {errorMessage: errorMessage} )
+  }
+
+  render() {  
+    return (
       <div>
         <div id = 'profile'>
           <div>
@@ -62,12 +92,21 @@ class Profile extends Component {
         <Modal view = {this.state.modalView} toggle = {this.toggleModalView.bind(this)}>
           <div className = 'small-windiow'>
             <div className = 'small-windiow__header'>НАСТРОЙКИ</div>
-            <ChoseAvatar selectedAvatar = {this.state.selectedAvatar} chose = {this.chosePoint.bind(this)} className = 'small-windiow__avatars' />
-            <input className = 'small-windiow__input' placeholder = 'NAME' />
-            <div className = 'small-windiow__err-message'>Такой ник уже существует</div>
+            <ChoseAvatar 
+              selectedAvatar = {this.state.selectedAvatar} 
+              chose = {this.chosePoint.bind(this)} 
+              className = 'small-windiow__avatars' 
+            />
+            <input 
+              className = 'small-windiow__input' 
+              placeholder = 'NAME' 
+              value = {this.state.inputName}
+              onChange = {e => this.setState( {inputName: e.target.value} )}
+            />
+            <div className = 'small-windiow__err-message'>{ this.state.errorMessage }</div>
             <button 
               className = {'small-windiow__button'} 
-              onClick = {() => {this.fixPoint.bind(this)(this.state.selectedAvatar); this.toggleModalView.bind(this)()}}>
+              onClick = {() => this.click.bind(this)()}>
               Сохранить
             </button>
           </div>

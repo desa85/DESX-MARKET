@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Main from './Main.js'
 import Shop from './Shop.js'
 import { Route, Redirect } from 'react-router'
+import helper from '../helper.js'
 
 class Authorization extends Component {
   constructor(props) {
@@ -16,11 +17,7 @@ class Authorization extends Component {
 
   render() {
     const db = this.props.db
-    const validateLogin = (login) => {
-      let reg = /^[A-z0-9_.]+$/g
-      let result = login.search(reg)
-      return !!~result
-  }
+    const validateLogin = helper.validateString
 
   const checkValidateLogin = () =>  {
     const userDb = db.user

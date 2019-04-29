@@ -11,15 +11,26 @@ class ChoseAvatar extends Component {
     }
   }
 
-  slider(avatatsCount, сountShowAvatars, props) {
-    var avatarNumber = +props.selectedAvatar > 2 ? +props.selectedAvatar - 2 : +props.selectedAvatar + avatatsCount - 2
+  slider(avatarsCount, сountShowAvatars, props) {
+    var avatarNumber = +props.selectedAvatar > 2 ? +props.selectedAvatar - 2 : +props.selectedAvatar + avatarsCount - 2
 
-    this.selectAvatar = () => (avatarNumber + 2) % avatatsCount || avatatsCount
-    this.next = () => (avatarNumber === avatatsCount) ? avatarNumber = 1 : avatarNumber++ && props.chose(this.selectAvatar())
-    this.back = () => avatarNumber === 1 ? avatarNumber = avatatsCount : avatarNumber-- && props.chose(this.selectAvatar())
-    this.сountShowAvatars = () => Array(сountShowAvatars).fill(true).map((x, i) => {return { index: (i + avatarNumber) % avatatsCount || avatatsCount, style: -Math.abs(i - 2) + 2 } })
+    this.selectAvatar = () => (avatarNumber + 2) % avatarsCount || avatarsCount
+    this.next = () => {
+      avatarNumber === avatarsCount ? avatarNumber = 1 : avatarNumber++
+      props.chose(this.selectAvatar())
+    }
+    this.back = () => {
+      avatarNumber === 1 ? avatarNumber = avatarsCount : avatarNumber--
+      props.chose(this.selectAvatar())
+    }
+    this.сountShowAvatars = () => Array(сountShowAvatars).fill(true).map((x, i) => {
+      return { 
+        index: (i + avatarNumber) % avatarsCount || avatarsCount, 
+        style: -Math.abs(i - 2) + 2 
+      } 
+    })
     this.change = value => {
-      avatarNumber = value > 2 ? value - 2 : value + avatatsCount - 2
+      avatarNumber = value > 2 ? value - 2 : value + avatarsCount - 2
       props.chose(this.selectAvatar())
       return 1
     }
@@ -41,6 +52,7 @@ class ChoseAvatar extends Component {
         this.isScroll = !this.isScroll
         setTimeout(() => this.isScroll = !this.isScroll, 200)
       }  
+      this.setState({pointer: this.state.pointer})
     }
   }
 

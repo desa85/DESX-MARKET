@@ -32,7 +32,7 @@ class App extends Component {
       item: itemDb,
       userItem: userItemDb,
       order: OrderDb,
-      updateUser: () => this.updateUser()
+      updateUser: () => this.updateUser(),
     }
     this.user = this.db.user.getCurrentUser()
     this.state = {
