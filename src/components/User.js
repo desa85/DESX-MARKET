@@ -15,7 +15,6 @@ class User extends Component {
           {this.props.userName}
         </div>
         <Money className = 'user-block__cash' money = {this.props.cash} />
-          <button className = 'user-block__button' >Инвентарь</button>
       </div>
     )
   }
