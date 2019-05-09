@@ -46,14 +46,16 @@ class Profile extends Component {
     const NICK_ALREADY_EXISTS_ERROR = 'Такой ник уже существует'
     let errorMessage = ''
 
-    this.fixPoint(this.state.selectedAvatar)
     if(this.state.inputName) {
       this.state.errorMessage && this.setState( {errorMessage: ''} )
       !helper.validateString(this.state.inputName) && (errorMessage = NICK_VALIDATION_ERROR) ||
       this.isExistUser(this.state.inputName) && (errorMessage = NICK_ALREADY_EXISTS_ERROR)
       !errorMessage && this.changeName.bind(this)(this.state.inputName)
     }
-    !errorMessage && this.toggleModalView()
+    if (!errorMessage) {
+      this.toggleModalView()
+      this.fixPoint(this.state.selectedAvatar)
+    }
     this.setState( {errorMessage: errorMessage} )
   }
 
