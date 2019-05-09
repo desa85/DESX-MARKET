@@ -32,6 +32,7 @@ class Profile extends Component {
 
   toggleModalView() {
     this.setState({modalView: !this.state.modalView})
+    this.setState( {inputName: ''} )
   }
 
   changeName(value) {
