@@ -132,7 +132,6 @@ button:hover {
   background-image: url('./currency.svg');
   background-size: cover;
   margin-left: 6px;
-  top: 3px;
   opacity: 0.7;
 }
 
@@ -191,7 +190,7 @@ button:hover {
   justify-content: space-around;
   margin: auto;
   margin-top: 150px;
-  background-color: @main-color; 
+  background-color: #DDD;
   width: 460px;
   height: 540px;
 
@@ -409,6 +408,7 @@ button:hover {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  justify-content: space-between;
   width: @width;
   height: @height;
   margin-top: 24px; 
@@ -428,7 +428,7 @@ button:hover {
     background-color: #cacaca;
     border-radius: 50px;
     margin: auto;
-    margin-top: @margin; 
+    margin-top: @margin + 24; 
     margin-bottom: @height / 2 - @avatar-size - @margin - 5px;
   }
 
@@ -438,17 +438,10 @@ button:hover {
 
   &__cash {
     .info-sigment;
+    border-bottom: none;
 
-  }
-
-  &__button {
-    .info-sigment;
-    background-color: #00000000;
-    border-bottom: none; 
-
-    &:hover {
-      background-color: @main-color;
-      cursor: pointer;
+    span {
+      top: -6px;
     }
   }
 }
@@ -534,17 +527,21 @@ button:hover {
     display: block;
     float: left;
     font-size: 24pt;
-    width: 40%;
+    width: calc(60% - 12px);
     height: 65px;
     margin-left: 12px;
     line-height: 2em;
+
+    span {
+      top: -12px;
+    }
   }
 
   &__button {
     display: block;
     float: right;
     font-size: 18px;
-    width: 50%;
+    width: 40%;
     height: 100%;
     background-color: #00000000;
     text-align: end;
@@ -564,11 +561,9 @@ button:hover {
 }
 
 .modal-inventory {
-  display: flex;
   position: absolute;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
-  flex-direction: column;
   align-items: center;
   width: 500px;
   height: 500px;
@@ -602,9 +597,13 @@ button:hover {
 
   &__button {
     .button;
-    width: 250px;
+    width: 100%;
     height: 60px;
     margin-top: 24px;
+
+    div {
+      color: #333;
+    }
   }
 
   &__name {
@@ -613,21 +612,23 @@ button:hover {
   }
 
   &__err {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 8%;
     font-size: 24px;
-    height: 100%;
+    height: 60%;
+    width: 70%;
     z-index: 100;
 
     div {
-      display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 12px;
       background-clip: content-box;
     }
+  }
+
+  &__info {
+    margin-top: 36px;
+    margin-bottom: 24px;
   }
 }
 
@@ -813,7 +814,7 @@ button:hover {
   .modal-inventory {
     border: 0;
     width: 100vw;
-    height: 40vh;
+    height: 70vh;
 
     &__img {
       height: 100px;

@@ -12,7 +12,7 @@ class UserDatabase extends DataBase {
   }
 
   getId(login) {
-    return this.dates.find(user => user.login === login)
+    return this.dates.find(user => user.login.toLowerCase() === login.toLowerCase())
   }
 
   generateFakeUsers() {
