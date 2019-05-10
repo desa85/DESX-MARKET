@@ -45,7 +45,7 @@ class Shop extends Component {
       <div className = 'shadow' onClick = {e => {if (e.target.className === 'shadow') this.toggleModal.bind(this)()}} >
         <div className = 'modal-inventory'>
           <div className = 'modal-inventory__err'>
-              <p>Недостаточно средств</p>
+              <p><h3>Недостаточно средств</h3></p>
               <div className = 'modal-inventory__info'>
                 <p>Ваш Баланс: <Money money = {this.state.modalValue.userBalance} /></p>
                 <p>Стоимость предмета: <Money money = {this.state.modalValue.price} /></p>

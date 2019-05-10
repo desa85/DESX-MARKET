@@ -561,11 +561,9 @@ button:hover {
 }
 
 .modal-inventory {
-  display: flex;
   position: absolute;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
-  flex-direction: column;
   align-items: center;
   width: 500px;
   height: 500px;
@@ -599,7 +597,7 @@ button:hover {
 
   &__button {
     .button;
-    width: 250px;
+    width: 100%;
     height: 60px;
     margin-top: 24px;
 
@@ -614,21 +612,23 @@ button:hover {
   }
 
   &__err {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 8%;
     font-size: 24px;
-    height: 100%;
+    height: 60%;
+    width: 70%;
     z-index: 100;
 
     div {
-      display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 12px;
       background-clip: content-box;
     }
+  }
+
+  &__info {
+    margin-top: 36px;
+    margin-bottom: 24px;
   }
 }
 
@@ -814,7 +814,7 @@ button:hover {
   .modal-inventory {
     border: 0;
     width: 100vw;
-    height: 40vh;
+    height: 70vh;
 
     &__img {
       height: 100px;
