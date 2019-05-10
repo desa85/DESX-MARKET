@@ -132,7 +132,6 @@ button:hover {
   background-image: url('./currency.svg');
   background-size: cover;
   margin-left: 6px;
-  top: 3px;
   opacity: 0.7;
 }
 
@@ -191,7 +190,7 @@ button:hover {
   justify-content: space-around;
   margin: auto;
   margin-top: 150px;
-  background-color: #FFFFFFCC; 
+  background-color: #DDD;
   width: 460px;
   height: 540px;
 
@@ -409,6 +408,7 @@ button:hover {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  justify-content: space-between;
   width: @width;
   height: @height;
   margin-top: 24px; 
@@ -428,7 +428,7 @@ button:hover {
     background-color: #cacaca;
     border-radius: 50px;
     margin: auto;
-    margin-top: @margin; 
+    margin-top: @margin + 24; 
     margin-bottom: @height / 2 - @avatar-size - @margin - 5px;
   }
 
@@ -440,6 +440,9 @@ button:hover {
     .info-sigment;
     border-bottom: none;
 
+    span {
+      top: -6px;
+    }
   }
 }
 
@@ -524,17 +527,21 @@ button:hover {
     display: block;
     float: left;
     font-size: 24pt;
-    width: 60%;
+    width: calc(60% - 12px);
     height: 65px;
     margin-left: 12px;
     line-height: 2em;
+
+    span {
+      top: -12px;
+    }
   }
 
   &__button {
     display: block;
     float: right;
     font-size: 18px;
-    width: 30%;
+    width: 40%;
     height: 100%;
     background-color: #00000000;
     text-align: end;
