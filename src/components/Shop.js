@@ -16,15 +16,15 @@ class Shop extends Component {
       loginFilter: '',
       moneyFilterFrom: '',
       moneyFilterTo: '',
-      sortBy: this.props.db.user.CREATED
+      sortBy: 'none'
     }
   }
 
   items(actions) {
     return this.props.db.order.getItemsInventory(this.props.db.user.sessionUserId(), actions)
-      .map(item => {
-        return {name: item.name, iconPath: item.iconPath, price: item.price, orderId: item.orderId}
-      })
+        .map(item => {
+          return {name: item.name, iconPath: item.iconPath, price: item.price, orderId: item.orderId, isItUser: item.isItUser}
+        })
   }
 
   toggleModal(values) {
@@ -86,6 +86,7 @@ class Shop extends Component {
       price = {item.price} 
       orderId = {item.orderId}
       toggleModal = {this.toggleModal.bind(this)}
+      isItUser = {item.isItUser}
     />)
 
     return (

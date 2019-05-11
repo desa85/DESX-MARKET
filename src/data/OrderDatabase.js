@@ -23,10 +23,18 @@ class Order extends DataBase {
     return this._datas
       .reduce((accumulator, order) => {
         order.login = this.userItemDb.itemDb.find(order.itemId).name
-        if (order.userId !== userId && order.status === NEW) {
+        if (order.status === NEW) {
           const itemId = this.userItemDb.find(order.userItemId).itemId
           const item = this.userItemDb.itemDb.find(itemId)
-          const value = {name: item.name, iconPath: item.iconPath, price: order.price, orderId: order.id, login: order.login}
+          const value = {
+            name: item.name, 
+            iconPath: item.iconPath, 
+            price: order.price, 
+            orderId: order.id, 
+            login: order.login, 
+            userId: order.userId,
+            isItUser: order.userId === this.sessionUserId()
+          }
           return (this.filterDatas(value, action)) ? [...accumulator, value] : accumulator
         } else return accumulator
       }, [])
