@@ -30,6 +30,10 @@ body {
   margin: 0px;
 }
 
+.link {
+  text-decoration: underline;
+  color: #F4F4F4
+}
 
 h1 {
   text-align: center;
@@ -564,7 +568,6 @@ button:hover {
   position: absolute;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
-  align-items: center;
   width: 500px;
   height: 500px;
   border: solid 1px @main-color;
@@ -573,16 +576,21 @@ button:hover {
 
   &__img {
     height: 200px;
+    margin: auto;
     margin-top: 24px;
 
     img {
+      display: block;
       height: 100%;
+      margin: auto;
     }
   }
 
   &__input {
+    display: block;
     width: 88px;
     height: 28px;
+    margin: auto;
     margin-top: 24px;
     color: #222;
     font-size: 18px;
@@ -608,6 +616,7 @@ button:hover {
 
   &__name {
     font-size: 24px;
+    text-align: center;
     margin-top: 24px;
   }
 

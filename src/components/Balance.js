@@ -4,6 +4,7 @@ import { Redirect } from 'react-router'
 import Header from './Header'
 import Footer from './Footer'
 import Money from './Money'
+import Shop from './Shop'
 
 const NORMAL = "normal"
 const SUCCESS = "success"
@@ -59,7 +60,7 @@ class Balance extends Component {
         <h1 >Успех! Баланс пополнен</h1>
         <h2 className = 'black-message' >  <Money money = {this.state.input} /></h2>
         <form id = 'authorization-form'>
-          <Link to = "/shop"><button id = 'button-login'  className = "button" >ок</button> </Link>
+          <Link to = {Shop.path}><button id = 'button-login'  className = "button" >ок</button> </Link>
         </form>
       </div>
     )
