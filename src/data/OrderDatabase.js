@@ -19,6 +19,22 @@ class Order extends DataBase {
     this.insert(data.userId, data.itemId, itemUserId, price, NEW , dateNow, dateNow)
   }
 
+  generateOrders() {
+    if (this.isEmpty()) {
+      const prices = [30, 40, 120, 150]
+      const users = Array(4).fill(0).map((userId, index) => this.userItemDb.userDb._datas[index + 3].id)
+      const items = [this.userItemDb.itemDb.getId('name', 'Шпора Матан'),
+      this.userItemDb.itemDb.getId('name', 'Меч короля')]
+      const userItemId = users.forEach((user, index) => {
+        this.addOrder(
+          this.userItemDb.getItems(user)
+            .find(item => item.item.id === [...items, ...items][index]).userItemId,
+          prices[index]
+        )
+      })
+    }
+  }
+
   getItemsInventory(userId, action) {
     return this._datas
       .reduce((accumulator, order) => {
