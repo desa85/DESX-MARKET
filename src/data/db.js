@@ -34,30 +34,25 @@ class DataBase {
 
 
   sortDatas(action) {
-    let sorting
-    if (action.sortBy !== 'none') {
-      sorting = (key) => (a, b) => {
-        let firstArg
-        let secondArg
-  
-        if (a[key] instanceof Date) [firstArg, secondArg] = [Date.parse(a[key]), Date.parse(b[key])]
-        if (typeof a[key] === 'string') [firstArg, secondArg] = [a[key].toUpperCase(), b[key].toUpperCase()]
-        if (typeof a[key] === 'number') [firstArg, secondArg] = [+a[key], +b[key]]
-  
-        if (firstArg === secondArg) {
-          return 0
-        } else return (firstArg > secondArg) ? 1 : -1 
-      }
-    } else {
-      sorting = () => (a, b) => {
-        let firstArg = a.userId === this.sessionUserId()
-        let secondArg = b.userId === this.sessionUserId()
-        
-        if (firstArg === secondArg) {
-          return 0
-        } else return (firstArg > secondArg) ? -1 : 1 
-      }
-    }
+    const sorting =
+      (action.sortBy !== 'none') ?
+        (key) => (a, b) => {
+          const [firstArg, secondArg] =
+          (typeof a[key] === 'string') && [a[key].toUpperCase(), b[key].toUpperCase()] ||
+          (typeof a[key] === 'number') && [+a[key], +b[key]] || []
+    
+          if (firstArg === secondArg) {
+            return 0
+          } else return (firstArg > secondArg) ? 1 : -1 
+        } :  
+        () => (a, b) => {
+          const firstArg = a.userId === this.sessionUserId()
+          const secondArg = b.userId === this.sessionUserId()
+          
+          if (firstArg === secondArg) {
+            return 0
+          } else return (firstArg > secondArg) ? -1 : 1 
+        }
 
     return sorting(action.sortBy)
   }
@@ -99,7 +94,7 @@ class DataBase {
     this.commitСhanges()
   }
 
-  getId(key, value) {
+  getByColumn(key, value) {
     return (this._datas.find(data => data[key] === value) || {}).id
   }
 

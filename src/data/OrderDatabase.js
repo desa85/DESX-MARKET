@@ -23,8 +23,10 @@ class Order extends DataBase {
     if (this.isEmpty()) {
       const prices = [30, 40, 120, 150]
       const users = Array(4).fill(0).map((userId, index) => this.userItemDb.userDb._datas[index + 3].id)
-      const items = [this.userItemDb.itemDb.getId('name', 'Шпора Матан'),
-      this.userItemDb.itemDb.getId('name', 'Меч короля')]
+      const items = [
+        this.userItemDb.itemDb.getByColumn('name', 'Шпора Матан'),
+        this.userItemDb.itemDb.getByColumn('name', 'Меч короля')
+      ]
       const userItemId = users.forEach((user, index) => {
         this.addOrder(
           this.userItemDb.getItems(user)
@@ -49,7 +51,7 @@ class Order extends DataBase {
             orderId: order.id, 
             login: order.login, 
             userId: order.userId,
-            isItUser: order.userId === this.sessionUserId()
+            isUserSession: order.userId === this.sessionUserId()
           }
           return (this.filterDatas(value, action)) ? [...accumulator, value] : accumulator
         } else return accumulator
