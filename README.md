@@ -1,5 +1,7 @@
 # DESX
 
+to site [DESX.SU](DESX.SU)
+
 ![Shop](https://user-images.githubusercontent.com/17051275/57585370-e46f0e80-74ef-11e9-901f-d9cfe2d5bab3.png)
 
 
@@ -12,11 +14,7 @@ This is simple one-page application with server imitation. It is a play goods st
 
 ## Technology stack
 
-The project is written in React using the create-react-app packages. Separately used by babel to compile less files
-
-## web site
-
-  <a>DESX.SU</a>
+The project is written in **React** using the **create-react-app** packages. Separately used by **babel** to compile less **files**
 
   ![change avatar](https://user-images.githubusercontent.com/17051275/57585389-1da77e80-74f0-11e9-9e72-e7756d23e0c4.png)
 
