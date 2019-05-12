@@ -15,8 +15,8 @@ class UserItemDatabase extends DataBase {
 
       present(user) {
         const presents = [
-        this.itemDb.getId('name', 'Меч короля'),
-        this.itemDb.getId('name', 'Шпора Матан')
+        this.itemDb.getByColumn('name', 'Меч короля'),
+        this.itemDb.getByColumn('name', 'Шпора Матан')
         ]
 
         const presentsAdd = [...this.pushSameValue(presents[0], this.random(4)), ...this.pushSameValue(presents[1], this.random(2))]
