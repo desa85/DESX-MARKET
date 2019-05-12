@@ -16,7 +16,7 @@ class Item extends Component {
           this.props.toggleModal(isSell)
         }} >
             <Money money = {this.props.price}  className = 'item__price' />
-            <button className = 'item__button' >КУПИТЬ</button>
+            <button className = 'item__button' style = { this.props.isUserSession ? {color: '#ff8800'} : {} } >{!this.props.isUserSession ? 'КУПИТЬ' : 'Снять с продажи'}</button>
         </div>
       </div>
     )

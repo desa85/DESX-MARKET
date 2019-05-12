@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
 import Item from './Item.js'
 import Header from './Header'
 import Footer from './Footer'
 import Paginator from './Paginator.js'
 import Money from './Money.js'
+import Modal from './Modal.js'
+import Shop from './Shop.js'
 
 class Inventory extends Component {
   constructor(props) {
@@ -14,7 +17,8 @@ class Inventory extends Component {
       modalItemIconPath: '',
       modalInput: '',
       modalUserItemId: '',
-      isModal: false,
+      isModalSell: false,
+      isModalConfirm: false,
       items: this.items()
     }
   }
@@ -36,7 +40,7 @@ class Inventory extends Component {
   
   toggleModal(itemName, itemIconPath, userItemId) {
       this.setState({
-        isModal: !this.state.isModal,
+        isModalSell: !this.state.isModalSell,
         modalItemName: itemName,
         modalItemIconPath: itemIconPath,
         modalUserItemId: userItemId,
@@ -50,8 +54,11 @@ class Inventory extends Component {
   }
   
   render() {
-    const modal = (
-        <div className = 'shadow' onClick = {e => {if (e.target.className === 'shadow') this.toggleModal.bind(this)()}} >
+    return(
+      !this.props.db.user.getCurrentUser() ? 
+      <Redirect to="/login" /> :
+      <div>
+        <Modal view = {this.state.isModalSell} toggle = {() => this.setState( {isModalSell: !this.state.isModalSell} )} >
           <div className = 'modal-inventory'>
             <div className = 'modal-inventory__name'>{this.state.modalItemName}</div>
             <div className = 'modal-inventory__img'><img src = {this.state.modalItemIconPath} /></div>
@@ -66,18 +73,23 @@ class Inventory extends Component {
                 onClick = {() => {
                   if (!this.state.modalInput.match(/^[0-9]+(\.[0-9]{1,2})?$/i) || +this.state.modalInput === 0) return
                   this.clickModal.bind(this)() 
-                  this.setState({items: this.items()
+                  this.setState({
+                    items: this.items(),
+                    isModalConfirm: true
                 })}} 
-              ><Money money = {`продать за ${+this.state.modalInput || 0} `} /></button>
+              >
+                <Money money = {`продать за ${+this.state.modalInput || 0} `} />
+              </button>
+          </div>
+        </Modal>
+        <Modal view = {this.state.isModalConfirm} toggle = {() => this.setState( {isModalConfirm: !this.state.isModalConfirm} )} >
+        <div className = 'modal-inventory'>
+          <div className = 'modal-inventory__err'>
+              <h1>Ваш предмет выставлен на продажу в разделе <Link to = {Shop.path} className = 'link'>Магазин</Link></h1>
+              <button className = 'modal-inventory__button' onClick = {() => this.setState( {isModalConfirm: !this.state.isModalConfirm} )}>ок</button>
           </div>
         </div>
-    )
-
-    return(
-      !this.props.db.user.getCurrentUser() ? 
-      <Redirect to="/login" /> :
-      <div>
-        {this.state.isModal && modal}
+        </Modal>
         <Header user = {this.props.user} path = {Inventory.path} db = {this.props.db} />
         <div id = 'content'>
           <Paginator datas = {this.state.items} page = {this.props.page} path = {Inventory.path} />

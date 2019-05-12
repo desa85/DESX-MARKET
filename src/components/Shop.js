@@ -16,14 +16,14 @@ class Shop extends Component {
       loginFilter: '',
       moneyFilterFrom: '',
       moneyFilterTo: '',
-      sortBy: this.props.db.user.CREATED
+      sortBy: 'none'
     }
   }
 
   items(actions) {
     return this.props.db.order.getItemsInventory(this.props.db.user.sessionUserId(), actions)
       .map(item => {
-        return {name: item.name, iconPath: item.iconPath, price: item.price, orderId: item.orderId}
+        return {name: item.name, iconPath: item.iconPath, price: item.price, orderId: item.orderId, isUserSession: item.isUserSession}
       })
   }
 
@@ -46,9 +46,9 @@ class Shop extends Component {
         <div className = 'modal-inventory'>
           <div className = 'modal-inventory__err'>
               <p><h3>Недостаточно средств</h3></p>
-              <div className = 'modal-inventory__info'>
-                <p>Ваш Баланс: <Money money = {this.state.modalValue.userBalance} /></p>
-                <p>Стоимость предмета: <Money money = {this.state.modalValue.price} /></p>
+              <div >
+                <p className = 'modal-inventory__info'>Ваш Баланс: <Money money = {this.state.modalValue.userBalance} /></p>
+                <p className = 'modal-inventory__info'>Стоимость предмета: <Money money = {this.state.modalValue.price} /></p>
               </div>
               <p>Вам не хватает: <Money money = {this.state.modalValue.lacks} /></p>
               <button className = 'modal-inventory__button' onClick = {this.toggleModal.bind(this, false)}>ок</button>
@@ -86,6 +86,7 @@ class Shop extends Component {
       price = {item.price} 
       orderId = {item.orderId}
       toggleModal = {this.toggleModal.bind(this)}
+      isUserSession = {item.isUserSession}
     />)
 
     return (

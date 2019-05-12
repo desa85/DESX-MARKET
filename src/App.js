@@ -23,6 +23,8 @@ userItemDb.presentAllUsers(FakeUserIds[0] ? Array(10).fill(FakeUserIds[0]) : Fak
 
 const OrderDb = new Order(userItemDb)
 
+OrderDb.generateOrders()
+
 class App extends Component {
 
   constructor(props) {
