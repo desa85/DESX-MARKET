@@ -64,6 +64,7 @@ class Inventory extends Component {
             <div className = 'modal-inventory__img'><img src = {this.state.modalItemIconPath} /></div>
             <input
               className = 'modal-inventory__input'
+              autofocus = "true"
               value = {this.state.modalInput} 
               onChange = {e => {
                 let value = e.target.value 

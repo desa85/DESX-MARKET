@@ -12,7 +12,9 @@ class Item extends Component {
         <div className = 'item__name'>{this.props.name}</div>
         <div className = 'item__img'><img src = {this.props.img} /></div>
         <div className = 'item__buy' onClick = {() => {
-          const isSell = this.props.db.order.toSell(this.props.orderId, this.props.db.user.sessionUserId())
+          const isSell = this.props.isUserSession ? 
+            this.props.db.order.cancel(this.props.orderId) : 
+            this.props.db.order.toSell(this.props.orderId, this.props.db.user.sessionUserId())
           this.props.toggleModal(isSell)
         }} >
             <Money money = {this.props.price}  className = 'item__price' />
