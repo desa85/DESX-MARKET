@@ -5,8 +5,6 @@
 /.pnp
 .pnp.js
 .vscode/
-src/index.css
-src/index.css.map
 
 # testing
 /coverage
