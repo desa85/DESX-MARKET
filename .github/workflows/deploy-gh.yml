@@ -1,10 +1,11 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      node_version:
+        required: true
+        default: 14
 
 jobs:
   deploy:
@@ -17,7 +18,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: ${{ github.event.inputs.node_version }}
 
       - name: Get yarn cache
         id: yarn-cache
