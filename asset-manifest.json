@@ -1,7 +1,7 @@
 {
   "main.css": "/DESX-MARKET/static/css/main.107841c1.chunk.css",
-  "main.js": "/DESX-MARKET/static/js/main.adafb942.chunk.js",
-  "main.js.map": "/DESX-MARKET/static/js/main.adafb942.chunk.js.map",
+  "main.js": "/DESX-MARKET/static/js/main.30748779.chunk.js",
+  "main.js.map": "/DESX-MARKET/static/js/main.30748779.chunk.js.map",
   "static/js/1.0b42ba9b.chunk.js": "/DESX-MARKET/static/js/1.0b42ba9b.chunk.js",
   "static/js/1.0b42ba9b.chunk.js.map": "/DESX-MARKET/static/js/1.0b42ba9b.chunk.js.map",
   "runtime~main.js": "/DESX-MARKET/static/js/runtime~main.6f29eb60.js",
@@ -9,6 +9,6 @@
   "static/media/index.css": "/DESX-MARKET/static/media/background.09d4897c.jpg",
   "static/css/main.107841c1.chunk.css.map": "/DESX-MARKET/static/css/main.107841c1.chunk.css.map",
   "index.html": "/DESX-MARKET/index.html",
-  "precache-manifest.fef593ca828b05088a6f006238ea1380.js": "/DESX-MARKET/precache-manifest.fef593ca828b05088a6f006238ea1380.js",
+  "precache-manifest.3e163e67379ec2a87f3be277f75e41bd.js": "/DESX-MARKET/precache-manifest.3e163e67379ec2a87f3be277f75e41bd.js",
   "service-worker.js": "/DESX-MARKET/service-worker.js"
 }

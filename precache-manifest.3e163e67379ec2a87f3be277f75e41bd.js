@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "adafb94264ee0370b42d",
+    "revision": "30748779802f45fb6b6c",
     "url": "/DESX-MARKET/static/css/main.107841c1.chunk.css"
   },
   {
-    "revision": "adafb94264ee0370b42d",
-    "url": "/DESX-MARKET/static/js/main.adafb942.chunk.js"
+    "revision": "30748779802f45fb6b6c",
+    "url": "/DESX-MARKET/static/js/main.30748779.chunk.js"
   },
   {
     "revision": "0b42ba9bcac7767f87e4",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/DESX-MARKET/static/media/background.09d4897c.jpg"
   },
   {
-    "revision": "c7180855015509cf538e4e369d418fc9",
+    "revision": "80b5f965b608cfb3fef471716d73fa12",
     "url": "/DESX-MARKET/index.html"
   }
 ];
