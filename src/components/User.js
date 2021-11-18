@@ -9,7 +9,7 @@ class User extends Component {
   render() {
     return (
       <div className = 'user-block'>
-        <div className = 'user-block__avatar' style = { {background: `url('/avatars/${this.props.userAvatar}.jpg') 0% 0% / cover`} }>
+        <div className = 'user-block__avatar' style = { {background: `url('./avatars/${this.props.userAvatar}.jpg') 0% 0% / cover`} }>
         </div>
         <div className = 'user-block__name'>
           {this.props.userName}

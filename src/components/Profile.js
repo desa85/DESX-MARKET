@@ -7,7 +7,7 @@ import helper from '../helper.js'
 
 class Profile extends Component {
   constructor(props) {
-      super(props) 
+      super(props)
       this.state = {
         modalView: false,
         selectedAvatar: this.props.db.user.getCurrentUser().avatar,
@@ -62,7 +62,7 @@ class Profile extends Component {
     this.setState( {errorMessage: errorMessage} )
   }
 
-  render() {  
+  render() {
     return (
       <div>
         <div id = 'profile'>
@@ -70,26 +70,26 @@ class Profile extends Component {
             <div id = 'profile__username'>{this.props.userName}</div>
             <Money id = 'profile__cash' money = {this.props.cash} />
           </div>
-          <div id = 'profile__avatar' style = { {background: `url('/avatars/${+this.props.db.user.getCurrentUser().avatar}.jpg') 0% 0% / cover`} } >
+          <div id = 'profile__avatar' style = { {background: `url('./avatars/${+this.props.db.user.getCurrentUser().avatar}.jpg') 0% 0% / cover`} } >
 
           </div>
         </div>
         <ul className = 'dropdown'>
           <li>
-            <Link to = '/balance' 
+            <Link to = '/balance'
               className = 'dropdown__a'>
                 ПОПОЛНИТЬ БАЛАНС
             </Link>
           </li>
           <li>
-            <Link to = ''  
-              className = 'dropdown__a' 
+            <Link to = ''
+              className = 'dropdown__a'
                 onClick = { e => {e.preventDefault(); this.toggleModalView.bind(this)()} }>
               НАСТРОЙКИ
             </Link>
           </li>
           <li>
-            <Link to = '' 
+            <Link to = ''
               className = 'dropdown__a'  onClick = {() => sessionStorage.clear()}>
               ВЫЙТИ
             </Link>
@@ -98,20 +98,20 @@ class Profile extends Component {
         <Modal view = {this.state.modalView} toggle = {this.toggleModalView.bind(this)}>
           <div className = 'small-windiow'>
             <div className = 'small-windiow__header'>НАСТРОЙКИ</div>
-            <ChoseAvatar 
-              selectedAvatar = {this.state.selectedAvatar} 
-              chose = {this.chosePoint.bind(this)} 
-              className = 'small-windiow__avatars' 
+            <ChoseAvatar
+              selectedAvatar = {this.state.selectedAvatar}
+              chose = {this.chosePoint.bind(this)}
+              className = 'small-windiow__avatars'
             />
-            <input 
-              className = 'small-windiow__input' 
-              placeholder = 'NAME' 
+            <input
+              className = 'small-windiow__input'
+              placeholder = 'NAME'
               value = {this.state.inputName}
               onChange = {e => this.setState( {inputName: e.target.value} )}
             />
             <div className = 'small-windiow__err-message'>{ this.state.errorMessage }</div>
-            <button 
-              className = {'small-windiow__button'} 
+            <button
+              className = {'small-windiow__button'}
               onClick = {() => this.click.bind(this)()}>
               Сохранить
             </button>

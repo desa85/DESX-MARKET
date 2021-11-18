@@ -8,8 +8,8 @@ class ItemDatabase extends DataBase {
 
   generateItems() {
     if (this.isEmpty()) {
-      this.insert('Меч короля', '/img/item_sword.jpg')
-      this.insert('Шпора Матан', '/img/item_shpora.jpg')
+      this.insert('Меч короля', './img/item_sword.jpg')
+      this.insert('Шпора Матан', './img/item_shpora.jpg')
     }
   }
 

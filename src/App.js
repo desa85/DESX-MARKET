@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch,  Redirect, Link, withRouter} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Redirect, Link, withRouter, HashRouter} from 'react-router-dom'
 import Main from './components/Main.js'
 import Login from './components/Login.js'
 import Shop from './components/Shop.js'
@@ -50,14 +50,14 @@ class App extends Component {
   render() {
 
     const main = (props) => <Main user = {userDb} />
-    const login = (props) => <Login db = {this.db} />        
+    const login = (props) => <Login db = {this.db} />
     const shop = ({match}) => <Shop user = {this.state.user} db = {this.db} page = {match.params.page} />
     const balance = (props) => <Balance user = {this.state.user} db = {this.db} />
     const inventory = ({match}) => <Inventory user = {this.state.user} db = {this.db} page = {match.params.page} />
     const users = ({match}) => <Users user = {this.state.user} db = {this.db} page = {match.params.page} />
 
     return (
-      <Router>
+      <HashRouter>
         <Switch>
           <div>
             <Route exact path = '/' render = {main} />
@@ -71,7 +71,7 @@ class App extends Component {
             <Route exact path = {Users.path} component = {users} />
           </div>
         </Switch>
-      </Router>
+      </HashRouter>
     )
   }
 }
