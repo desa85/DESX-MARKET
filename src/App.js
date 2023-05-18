@@ -59,7 +59,6 @@ class App extends Component {
     return (
       <HashRouter>
         <Switch>
-          <div>
             <Route exact path = '/' render = {main} />
             <Route path = {Shop.path + '/:page'} component = {shop} />
             <Route exact path = {Shop.path} component = {shop} />
@@ -69,7 +68,8 @@ class App extends Component {
             <Route path = '/login' render = {login} />
             <Route path = {Users.path + '/:page'} component = {users} />
             <Route exact path = {Users.path} component = {users} />
-          </div>
+            <Route render = {login} />
+
         </Switch>
       </HashRouter>
     )
